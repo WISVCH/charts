@@ -1,0 +1,21 @@
+{{- range $key, $val := .Values.editions }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "hackdelft.fullname" $ }}-{{ $key }}
+spec:
+  rules:
+    {{- range $domain := $.Values.domains}}
+    - host: {{ $key }}.{{ $domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ include "hackdelft.fullname" $ }}-{{ $key }}
+                port:
+                  name: http
+    {{- end }}
+{{- end }}

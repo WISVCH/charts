@@ -1,0 +1,18 @@
+{{- range $key, $val := .Values.editions }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "hackdelft.fullname" $ }}-{{ $key }}
+  labels:
+    {{- include "hackdelft.labels" (merge (dict "edition" $key) $) | nindent 4 }}
+spec:
+  type: {{ default "ClusterIP" .service.type | quote }}
+  ports:
+    - name: http
+      protocol: TCP
+      port: {{ default 80 .service.port }}
+      targetPort: http
+  selector:
+    {{- include "hackdelft.selectorLabels" (merge (dict "edition" $key) $) | nindent 4 }}
+{{- end }}
