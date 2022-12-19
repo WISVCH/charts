@@ -18,10 +18,12 @@ spec:
                 port:
                   name: http
     {{- end }}
+  {{- if $.Values.tlsSecret }}
   tls:
   - hosts:
     {{- range $domain := $.Values.domains}}
       - {{ $domain }}
     {{- end }}
     secretName: {{ $.Values.tlsSecret }}
+  {{- end}}
 {{- end }}
