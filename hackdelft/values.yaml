@@ -1,6 +1,7 @@
 defaultEdition: "2022"
 fullnameOverride: ""
 
+tlsSecret: ""
 domains:
   - hackdelft.nl
   - hackdelft.com

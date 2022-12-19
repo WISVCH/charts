@@ -1,6 +1,7 @@
 fullnameOverride: ""
 replicaCount: 1
 
+tlsSecret: ""
 domains:
   - areafiftylan.nl
 
