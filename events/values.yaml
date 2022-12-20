@@ -19,7 +19,7 @@ mail:
 
 hibernate:
   hb2mddl:
-    auto: update
+    auto: validate
 
 oauth:
   issuer: https://connect.ch.tudelft.nl
@@ -34,6 +34,9 @@ oauth:
     
 mollie:
   key: ""
+
+flyway:
+  enable: true
 
 postgres:
   username: ""
