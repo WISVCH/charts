@@ -9,7 +9,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/events"
+            path: "/"
             backend:
               service:
                 name: {{ include "events.fullname" $ }}
