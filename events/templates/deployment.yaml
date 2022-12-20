@@ -34,7 +34,7 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/liveness
               port: http
             initialDelaySeconds: 80
             periodSeconds: 20
@@ -42,7 +42,7 @@ spec:
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/readiness
               port: http
             initialDelaySeconds: 80
             periodSeconds: 20
