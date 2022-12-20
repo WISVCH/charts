@@ -57,6 +57,8 @@ spec:
             value: "true"
           - name: SERVER_PORT
             value: "8080"
+          - name: SERVER_ADDRESS
+            value: "0.0.0.0"
           - name: SPRING_MAIL_HOST
             value: {{.Values.mail.host}}
           - name: SPRING_MAIL_PORT
