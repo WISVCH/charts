@@ -74,7 +74,7 @@ spec:
           - name: SPRING_DATASOURCE_PASSWORD
             value: {{ .Values.postgres.password}}
           - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgres://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
+            value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
           - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
             value: {{.Values.hibernate.hb2mddl.auto}}
           - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI

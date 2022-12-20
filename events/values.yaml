@@ -19,7 +19,7 @@ mail:
 
 hibernate:
   hb2mddl:
-    auto: validate
+    auto: update
 
 oauth:
   issuer: https://connect.ch.tudelft.nl
