@@ -3,6 +3,8 @@ replicaCount: 1
 
 domain: events.wisv.ch
 
+tlsSecret: ""
+
 service:
   type: ClusterIP
   port: 80

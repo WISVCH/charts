@@ -15,3 +15,9 @@ spec:
                 name: {{ include "events.fullname" $ }}
                 port:
                   name: http
+  {{- if .Values.tlsSecret }}
+  tls:
+  - hosts:
+      - {{ .Values.domain }}
+    secretName: {{ .Values.tlsSecret }}
+  {{- end}}
