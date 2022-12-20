@@ -78,7 +78,7 @@ spec:
           - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
             value: {{.Values.hibernate.hb2mddl.auto}}
           - name: SPRING_JPA_GENERATE_DDL
-            value: {{.Values.hibernate.generate-ddl | quote}}
+            value: {{.Values.hibernate.generateDdl | quote}}
           - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
             value: {{.Values.oauth.issuer}}
           - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI

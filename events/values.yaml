@@ -20,7 +20,7 @@ mail:
   port: 25
 
 hibernate:
-  generate-ddl: false
+  generateDdl: false
   hb2mddl:
     auto: validate
 
