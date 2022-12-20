@@ -1,0 +1,45 @@
+fullnameOverride: ""
+replicaCount: 1
+
+domain: events.wisv.ch
+
+service:
+  type: ClusterIP
+  port: 80
+
+image:
+  repository: ghcr.io/wisvch/events
+  tag: latest
+  pullPolicy: IfNotPresent
+  pullSecrets: {}
+
+mail:
+  host: ch.tudelft.nl
+  port: 25
+
+hibernate:
+  hb2mddl:
+    auto: validate
+
+oauth:
+  issuer: https://connect.ch.tudelft.nl
+  client:
+    url: https://events.wisv.ch
+    id: events-cloud
+    secret: ""
+  scope: openid, profile, email, ldap
+  groups:
+    admin: chbeheer,dienst2,epa,vc
+    beta: svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv, svenh, jurriaant, yoshia, joepj, juliand
+    
+mollie:
+  key: ""
+
+postgres:
+  username: ""
+  password: ""
+  host: ""
+  port: 5432
+  database: events
+
+    

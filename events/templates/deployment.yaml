@@ -1,0 +1,114 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "events.fullname" . }}
+  labels:
+    {{- include "events.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "events.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        {{- include "events.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 5
+          env:
+          - name: MANAGEMENT_CONTEXT_PATH
+            value: /management
+          - name: MANAGEMENT_ENDPOINTS_ENABLED
+            value: "false"
+          - name: MANAGEMENT_ENDPOINTS_HEALTH_ENABLED
+            value: "true"
+          - name: SERVER_PORT
+            value: "8080"
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: /
+          - name: SPRING_MAIL_HOST
+            value: {{.Values.mail.host}}
+          - name: SPRING_MAIL_PORT
+            value: {{.Values.mail.port | quote}}
+          - name: SPRING_PROFILES_ACTIVE
+            value: production
+          - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
+            value: 5mb
+          - name: JAVA_OPTS
+            value: -Xms128m -Xmx128m
+          - name: SPRING_DATASOURCE_USERNAME
+            value: {{ .Values.postgres.username}}
+          - name: SPRING_DATASOURCE_PASSWORD
+            value: {{ .Values.postgres.password}}
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgres://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
+          - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
+            value: {{.Values.hibernate.hb2mddl.auto}}
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
+            value: {{.Values.oauth.issuer}}
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI
+            value: {{.Values.oauth.client.url}}
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
+            value: {{.Values.oauth.client.id}}
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
+            value: {{.Values.oauth.client.secret}}
+          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
+            value: {{.Values.oauth.scope}}
+          - name: SPRING_FLYWAY_ENABLE
+            value: "true"
+          - name: SPRING_FLYWAY_SCHEMAS
+            value: event
+          - name: SPRING_FLYWAY_TABLE
+            value: schema_version
+          - name: TZ
+            value: Europe/Amsterdam
+          - name: WISVCH_CONNECT_ADMIN_GROUPS
+            value: {{.Values.oauth.groups.admin}}
+          - name: WISVCH_CONNECT_BETA_USERS
+            value: {{.Values.oauth.groups.beta}}
+          - name: WISVCH_EVENTS_IMAGE_PATH
+            value: https://events.wisv.ch/api/v1/documents/
+          - name: MOLLIE_CLIENTURI
+            value: https://events.wisv.ch
+          - name: MOLLIE_APIKEY
+            value: {{.Values.mollie.key}}
+          resources:
+          limits:
+            cpu: 500m
+            memory: 500Mi
+          requests:
+            cpu: 200m
+            memory: 150Mi
