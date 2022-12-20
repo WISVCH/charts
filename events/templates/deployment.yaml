@@ -106,9 +106,9 @@ spec:
           - name: MOLLIE_APIKEY
             value: {{.Values.mollie.key}}
           resources:
-          limits:
-            cpu: 500m
-            memory: 500Mi
-          requests:
-            cpu: 200m
-            memory: 150Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 200m
+              memory: 150Mi
