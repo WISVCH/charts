@@ -67,10 +67,12 @@ spec:
             value: {{.Values.mail.port | quote}}
           - name: SPRING_MAIL_USERNAME
             value: {{.Values.mail.username}}
+          - name: SPRING_MAIL_PASSWORD
+            value: {{.Values.mail.password}}
           - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
-            value: true
+            value: "true"
           - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
-            value: true
+            value: "true"
           - name: SPRING_MAIL_PORT
             value: {{.Values.mail.port | quote}}
           - name: SPRING_PROFILES_ACTIVE
