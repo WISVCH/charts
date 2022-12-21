@@ -48,9 +48,9 @@ spec:
           - name: CONNECTCLIENTID
             value: {{ .Values.auth.clientId }}
           - name: CLIENTSECRET
-            value: {{ .values.auth.clientSecret }}
+            value: {{ .Values.auth.clientSecret }}
           - name: REDIRECTURL
-            value: {{ .values.mand.redirect }}
+            value: {{ .Values.mand.redirect }}
           - name: ALLOWEDGROUP
             value: {{ .Values.mand.allowedGroup }}
           - name: EMPTYREDIRECT
