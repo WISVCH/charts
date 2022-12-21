@@ -18,6 +18,8 @@ image:
 mail:
   host: ch.tudelft.nl
   port: 25
+  username: ""
+  password: ""
 
 hibernate:
   generateDdl: false
