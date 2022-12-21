@@ -42,7 +42,7 @@ spec:
           - name: DBHOST
             value: {{ .Values.postgres.host }}
           - name: DBPORT
-            value: {{ .Values.postgres.port }}
+            value: {{ .Values.postgres.port | quote }}
           - name: CONNECTURL
             value: {{ .Values.auth.url }}
           - name: CONNECTCLIENTID
