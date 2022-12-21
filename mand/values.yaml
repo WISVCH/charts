@@ -1,0 +1,43 @@
+replicaCount: 1
+image:
+  repository: ghcr.io/wisvch/mand
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+auth:
+  url: https://connect.ch.tudelft.nl
+  clientId: mand
+  clientSecret: ""
+
+mand:
+  allowedGroup: mand
+  redirect: https://wisv.ch/admin/
+  emptyRedirect: https://ch.tudelft.nl/
+  notFoundRedirect: https://ch.tudelft.nl/404
+
+postgres:
+  username: ""
+  password: ""
+  name: mand
+  host: ""
+  port: 5432
+
+ingress:
+  enabled: false
+  className: ""
+  hosts:
+    - host: wisv.ch
+      paths:
+        - path: "/"
+          pathType: Prefix
+  tls:
+    - hosts: []
+      secretName: ""

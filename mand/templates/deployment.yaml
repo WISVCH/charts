@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mand.fullname" . }}
+  labels:
+    {{- include "mand.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      {{- include "mand.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mand.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: DBUSER
+            value: {{ .Values.postgres.username }}
+          - name: DBPASSWORD
+            value: {{ .Values.postgres.password }}
+          - name: DBNAME
+            value: {{ .Values.postgres.name }}
+          - name: DBHOST
+            value: {{ .Values.postgres.host }}
+          - name: DBPORT
+            value: {{ .Values.postgres.port }}
+          - name: CONNECTURL
+            value: {{ .Values.auth.url }}
+          - name: CONNECTCLIENTID
+            value: {{ .Values.auth.clientId }}
+          - name: CLIENTSECRET
+            value: {{ .values.auth.clientSecret }}
+          - name: REDIRECTURL
+            value: {{ .values.mand.redirect }}
+          - name: ALLOWEDGROUP
+            value: {{ .Values.mand.allowedGroup }}
+          - name: EMPTYREDIRECT
+            value: {{ .Values.mand.emptyRedirect }}
+          - name: NOTFOUNDURL
+            value: {{ .Values.mand.notFoundRedirect }}
+          - name: GIN_MODE
+            value: release
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
