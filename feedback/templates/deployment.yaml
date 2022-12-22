@@ -74,7 +74,7 @@ spec:
           - name: SPRING_PROFILES_ACTIVE
             value: production
           - name: JAVA_OPTS
-            value: -Xms128m -Xmx256m
+            value: -Xms128m -Xmx196m
           - name: SPRING_DATASOURCE_USERNAME
             value: {{ .Values.postgres.username}}
           - name: SPRING_DATASOURCE_PASSWORD
@@ -123,8 +123,8 @@ spec:
             value: {{.Values.mail.notifications.to.educationCS}}
           resources:
             limits:
-              cpu: 500m
-              memory: 500Mi
+              cpu: 100m
+              memory: 200Mi
             requests:
-              cpu: 200m
+              cpu: 50m
               memory: 150Mi
