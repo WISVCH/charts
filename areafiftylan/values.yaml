@@ -14,3 +14,10 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
   pullSecrets: {}
+
+postgres:
+  username: areafiftylan
+  password: areafiftylan
+  database: areafiftylan
+  host: postgres
+  port: 5432
