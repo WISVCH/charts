@@ -101,7 +101,7 @@ spec:
             value: {{.Values.recaptcha.site}}
           - name: WISVCH_RECAPTCHA_SECRET
             value: {{.Values.recaptcha.secret}}
-          - name: SPRING_FLYWAY_ENABLE
+          - name: SPRING_FLYWAY_ENABLED
             value: {{.Values.flyway.enable | quote}}
           - name: SPRING_FLYWAY_SCHEMAS
             value: event
