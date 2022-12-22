@@ -111,6 +111,16 @@ spec:
             value: Europe/Amsterdam
           - name: WISVCH_CONNECT_ADMIN_GROUPS
             value: {{.Values.oauth.groups.admin}}
+          - name: MAILNOTIFICATIONS_FROM
+            value: {{.Values.mail.notifications.from}}
+          - name: MAILNOTIFICATIONS_TO_ASSOCIATION
+            value: {{.Values.mail.notifications.to.association}}
+          - name: MAILNOTIFICATIONS_TO_EDUCATION
+            value: {{.Values.mail.notifications.to.education}}
+          - name: MAILNOTIFICATIONS_TO_EDUCATION_A_M
+            value: {{.Values.mail.notifications.to.educationAM}}
+          - name: MAILNOTIFICATIONS_TO_EDUCATION_C_S
+            value: {{.Values.mail.notifications.to.educationCS}}
           resources:
             limits:
               cpu: 100m
