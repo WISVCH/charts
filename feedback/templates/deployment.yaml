@@ -102,9 +102,9 @@ spec:
           - name: SPRING_FLYWAY_ENABLED
             value: {{.Values.flyway.enabled | quote}}
           - name: SPRING_FLYWAY_SCHEMAS
-            value: event
+            value: public
           - name: SPRING_FLYWAY_TABLE
-            value: schema_version
+            value: flyway_schema_history
           - name: TZ
             value: Europe/Amsterdam
           - name: WISVCH_CONNECT_ADMIN_GROUPS
