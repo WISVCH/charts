@@ -123,8 +123,8 @@ spec:
             value: {{.Values.mail.notifications.to.educationCS}}
           resources:
             limits:
-              cpu: 100m
-              memory: 125Mi
+              cpu: 125m
+              memory: 200Mi
             requests:
               cpu: 50m
               memory: 125Mi
