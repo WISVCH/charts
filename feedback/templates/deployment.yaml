@@ -79,7 +79,7 @@ spec:
             value: {{ .Values.postgres.password}}
           - name: SPRING_DATASOURCE_URL
             value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
-          - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
             value: {{.Values.hibernate.hb2mddl.auto}}
           - name: SPRING_JPA_GENERATE_DDL
             value: {{.Values.hibernate.generateDdl | quote}}
