@@ -1,0 +1,52 @@
+fullnameOverride: ""
+replicaCount: 1
+
+domain: feedback.wisv.ch
+
+tlsSecret: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+image:
+  repository: ghcr.io/wisvch/feedback-tool
+  tag: latest
+  pullPolicy: IfNotPresent
+  pullSecrets: {}
+
+hibernate:
+  generateDdl: false
+  hb2mddl:
+    auto: validate
+
+oauth:
+  issuer: https://connect.ch.tudelft.nl
+  client:
+    url: https://feedback.wisv.ch
+    id: feedback-tool
+    secret: ""
+  groups: 
+    admin: beheer
+
+mail:
+  host: ch.tudelft.nl
+  port: 587
+  username: ""
+  password: ""
+
+postgres:
+  username: ""
+  password: ""
+  host: ""
+  port: 5432
+  database: feedback
+
+recaptcha:
+  site: ""
+  secret: ""
+
+flyway:
+  enable: ""
+
+    
