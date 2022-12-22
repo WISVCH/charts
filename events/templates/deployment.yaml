@@ -57,10 +57,22 @@ spec:
             value: "true"
           - name: SERVER_PORT
             value: "8080"
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: "/"
           - name: SERVER_ADDRESS
             value: "0.0.0.0"
           - name: SPRING_MAIL_HOST
             value: {{.Values.mail.host}}
+          - name: SPRING_MAIL_PORT
+            value: {{.Values.mail.port | quote}}
+          - name: SPRING_MAIL_USERNAME
+            value: {{.Values.mail.username}}
+          - name: SPRING_MAIL_PASSWORD
+            value: {{.Values.mail.password}}
+          - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
+            value: "true"
+          - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
+            value: "true"
           - name: SPRING_MAIL_PORT
             value: {{.Values.mail.port | quote}}
           - name: SPRING_PROFILES_ACTIVE
