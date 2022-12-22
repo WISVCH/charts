@@ -56,6 +56,6 @@ recaptcha:
   secret: ""
 
 flyway:
-  enable: ""
+  enabled: true
 
     

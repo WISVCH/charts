@@ -41,7 +41,7 @@ mollie:
   key: ""
 
 flyway:
-  enable: true
+  enabled: true
 
 postgres:
   username: ""

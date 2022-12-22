@@ -101,8 +101,8 @@ spec:
             value: {{.Values.oauth.client.secret}}
           - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
             value: {{.Values.oauth.scope}}
-          - name: SPRING_FLYWAY_ENABLE
-            value: {{.Values.flyway.enable | quote}}
+          - name: SPRING_FLYWAY_ENABLED
+            value: {{.Values.flyway.enabled | quote}}
           - name: SPRING_FLYWAY_SCHEMAS
             value: event
           - name: SPRING_FLYWAY_TABLE
