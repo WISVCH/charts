@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
-      - app.kubernetes.io/component: "frontend"
+      app.kubernetes.io/component: "frontend"
       {{- include "areafiftylan-legacy.selectorLabels" . | nindent 6 }}
   strategy:
     type: RollingUpdate
@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        - app.kubernetes.io/component: "frontend"
+        app.kubernetes.io/component: "frontend"
         {{- include "areafiftylan-legacy.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.frontend.image.pullSecrets }}
