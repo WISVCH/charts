@@ -3,7 +3,8 @@ fullnameOverride: ""
 tlsSecret: ""
 domains:
   - areafiftylan.nl
-  - areafiftylan.com
+  - area51an.nl
+  - area5lan.nl
 
 frontend:
   replicaCount: 1
