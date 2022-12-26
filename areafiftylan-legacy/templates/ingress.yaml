@@ -26,16 +26,16 @@ spec:
     #             name: {{ include "areafiftylan-legacy.fullname" $ }}-api
     #             port:
     #               name: http
-    # - host: classified.{{ $domain }}
-    #   http:
-    #     paths:
-    #       - pathType: Prefix
-    #         path: "/"
-    #         backend:
-    #           service:
-    #             name: {{ include "areafiftylan-legacy.fullname" $ }}-admin
-    #             port:
-    #               name: http
+    - host: classified.{{ $domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ include "areafiftylan-legacy.fullname" $ }}-admin
+                port:
+                  name: http
     {{- end }}
   {{- if .Values.tlsSecret }}
   tls:
