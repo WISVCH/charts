@@ -16,16 +16,16 @@ spec:
                 name: {{ include "areafiftylan-legacy.fullname" $ }}-frontend
                 port:
                   name: http
-    # - host: api.{{ $domain }}
-    #   http:
-    #     paths:
-    #       - pathType: Prefix
-    #         path: "/"
-    #         backend:
-    #           service:
-    #             name: {{ include "areafiftylan-legacy.fullname" $ }}-api
-    #             port:
-    #               name: http
+    - host: api.{{ $domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ include "areafiftylan-legacy.fullname" $ }}-api
+                port:
+                  name: http
     - host: classified.{{ $domain }}
       http:
         paths:
