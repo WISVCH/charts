@@ -25,7 +25,7 @@ editions:
       type: ClusterIP
       port: 80
     image:
-      repository: quay.io/wisvch/hackdelft-2019
+      repository: ghcr.io/wisvch/hackdelft-2019
       tag: 61
       pullPolicy: IfNotPresent
       pullSecrets: {}
@@ -36,7 +36,7 @@ editions:
       type: ClusterIP
       port: 80
     image:
-      repository: quay.io/wisvch/hackdelft-2018
+      repository: ghcr.io/wisvch/hackdelft-2018
       tag: 75
       pullPolicy: IfNotPresent
       pullSecrets: {}
@@ -47,7 +47,7 @@ editions:
       type: ClusterIP
       port: 80
     image:
-      repository: quay.io/wisvch/hackdelft-2017
+      repository: ghcr.io/wisvch/hackdelft-2017
       tag: 41
       pullPolicy: IfNotPresent
       pullSecrets: {}
