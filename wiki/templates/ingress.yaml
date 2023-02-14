@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "wiki.fullname" . }}
+spec:
+  rules:
+    - host: {{ .Values.domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ include "wiki.fullname" $ }}
+                port:
+                  name: http
+  {{- if .Values.tlsSecret }}
+  tls:
+  - hosts:
+      - {{ .Values.domain }}
+    secretName: {{ .Values.tlsSecret }}
+  {{- end}}
