@@ -60,7 +60,12 @@ spec:
             requests:
               cpu: 100m
               memory: 100Mi
-    {{- with .Values.volumeMounts }}
+        {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
-    {{- end }}
+        {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    
