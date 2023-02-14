@@ -55,11 +55,11 @@ spec:
             value: {{.Values.oauth.client.secret}}
           resources:
             limits:
-              cpu: 500m
-              memory: 500Mi
-            requests:
               cpu: 200m
-              memory: 150Mi
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
     {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
