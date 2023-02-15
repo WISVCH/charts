@@ -5,15 +5,6 @@ domain: wiki.wisv.ch
 
 tlsSecret: ""
 
-volumes:
-  - name: wiki-data
-    persistentVolumeClaim:
-      claimName: wiki-pvc
-
-volumeMounts:
-- mountPath: /var/www/dokuwiki/data
-  name: wiki-data
-
 service:
   type: ClusterIP
   port: 80

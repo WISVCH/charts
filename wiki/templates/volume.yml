@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wiki-pvc
-  namespace: default
+  name: {{ include "wiki.fullname" . }}
 spec:
   accessModes:
     - ReadWriteOnce

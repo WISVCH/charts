@@ -55,12 +55,12 @@ spec:
             requests:
               cpu: 100m
               memory: 100Mi
-        {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{- toYaml . | nindent 12 }}
-        {{- end }}
-      {{- with .Values.volumes }}
+          - mountPath: /var/www/dokuwiki/data
+            name: wiki-data
       volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+        - name: wiki-data
+          persistentVolumeClaim:
+            claimName: {{ include "wiki.fullname" . }}
+
     
