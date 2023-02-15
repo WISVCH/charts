@@ -72,7 +72,7 @@ spec:
           - name: SPRING_PROFILES_ACTIVE
             value: production
           - name: JAVA_OPTS
-            value: -Xms128m -Xmx256m
+            value: -Xms128m -Xmx192m
           - name: SPRING_DATASOURCE_USERNAME
             value: {{ .Values.postgres.username}}
           - name: SPRING_DATASOURCE_PASSWORD
@@ -122,7 +122,7 @@ spec:
           resources:
             limits:
               cpu: 300m
-              memory: 500Mi
+              memory: 256Mi
             requests:
               cpu: 100m
-              memory: 150Mi
+              memory: 192Mi

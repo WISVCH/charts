@@ -56,7 +56,7 @@ spec:
             timeoutSeconds: 1
           env:
           - name: JAVA_OPTS
-            value: -Xms64m -Xmx230m
+            value: -Xms64m -Xmx192m
           - name: SPRING_PROFILES_ACTIVE
             value: production
           - name: SERVER_PORT

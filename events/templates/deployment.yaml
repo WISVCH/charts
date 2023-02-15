@@ -78,7 +78,7 @@ spec:
           - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
             value: 5mb
           - name: JAVA_OPTS
-            value: -Xms128m -Xmx128m
+            value: -Xms128m -Xmx192m
           - name: SPRING_DATASOURCE_USERNAME
             value: {{ .Values.postgres.username}}
           - name: SPRING_DATASOURCE_PASSWORD
@@ -120,7 +120,7 @@ spec:
           resources:
             limits:
               cpu: 500m
-              memory: 500Mi
+              memory: 512Mi
             requests:
               cpu: 200m
-              memory: 150Mi
+              memory: 192Mi
