@@ -87,8 +87,8 @@ spec:
             value: Europe/Amsterdam
           resources:
             limits:
-              cpu: 300m
+              cpu: 100m
               memory: 256Mi
             requests:
-              cpu: 100m
+              cpu: 50m
               memory: 128Mi
