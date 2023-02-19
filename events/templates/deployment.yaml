@@ -119,7 +119,7 @@ spec:
             value: {{.Values.mollie.key}}
           resources:
             limits:
-              cpu: 200m
+              cpu: 500m
               memory: 512Mi
             requests:
               cpu: 50m
