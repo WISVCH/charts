@@ -122,5 +122,37 @@ spec:
               cpu: 500m
               memory: 512Mi
             requests:
+              cpu: 200m
+              memory: 150Mi
+        - name: cloud-sql-proxy
+          # It is recommended to use the latest version of the Cloud SQL proxy
+          # Make sure to update on a regular schedule!
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.0.0  # make sure to use the latest version
+          args:
+            # If connecting from a VPC-native GKE cluster, you can use the
+            # following flag to have the proxy connect over private IP
+            # - "--private-ip"
+
+            # Enable structured logging with LogEntry format:
+            - "--structured-logs"
+
+            # Replace DB_PORT with the port the proxy should listen on
+            - "--port={{.Values.postgres.port}}"
+            - "events_cloud_sql"
+
+          securityContext:
+            # The default Cloud SQL proxy image runs as the
+            # "nonroot" user and group (uid: 65532) by default.
+            runAsNonRoot: true
+          # You should use resource requests/limits as a best practice to prevent
+          # pods from consuming too many resources and affecting the execution of
+          # other pods. You should adjust the following values based on what your
+          # application needs. For details, see
+          # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+          resources:
+            limits:
+              cpu: 100m
+              memory: 200Mi
+            requests:
               cpu: 50m
-              memory: 128Mi
+              memory: 50Mi
