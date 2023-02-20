@@ -1,26 +1,23 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "hackdelft.fullname" . }}
+  name: {{ include "wiki.fullname" . }}
 spec:
   rules:
-    {{- range $domain := .Values.domains}}
-    - host: {{ $domain }}
+    - host: {{ .Values.domain }}
       http:
         paths:
           - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: {{ include "hackdelft.fullname" $ }}-{{ $.Values.defaultEdition }}
+                name: {{ include "wiki.fullname" $ }}
                 port:
                   name: http
-    {{- end }}
   {{- if .Values.tlsSecret }}
   tls:
   - hosts:
-    {{- range $domain := .Values.domains}}
-      - {{ $domain }}
-    {{- end }}
+      - {{ .Values.domain }}
     secretName: {{ .Values.tlsSecret }}
-  {{- end }}
+  {{- end}}

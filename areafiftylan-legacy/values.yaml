@@ -1,0 +1,81 @@
+fullnameOverride: ""
+tlsSecret: ""
+domains:
+  - areafiftylan.nl
+  - area51an.nl
+  - area5lan.nl
+
+postgres:
+  username: ""
+  password: ""
+  host: ""
+  port: 5432
+  database: areafiftylan-legacy
+
+mail:
+  host: ch.tudelft.nl
+  port: 25
+  username: ""
+  password: ""
+  auth: true
+  starttls: true
+
+mollie:
+  key: ""
+
+gmaps:
+  key: ""
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: ghcr.io/areafiftylan/lancie-frontend
+    tag: latest
+    pullPolicy: IfNotPresent
+    pullSecrets: {}
+  service:
+    type: ClusterIP
+    port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 128Mi
+
+api:
+  replicaCount: 1
+  image:
+    repository: ghcr.io/areafiftylan/lancie-api
+    tag: latest
+    pullPolicy: IfNotPresent
+    pullSecrets: {}
+  service:
+    type: ClusterIP
+    port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
+admin:
+  replicaCount: 1
+  image:
+    repository: ghcr.io/areafiftylan/lancie-admin
+    tag: latest
+    pullPolicy: IfNotPresent
+    pullSecrets: {}
+  service:
+    type: ClusterIP
+    port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 128Mi

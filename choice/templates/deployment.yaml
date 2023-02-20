@@ -88,7 +88,11 @@ spec:
           resources:
             limits:
               cpu: 500m
+<<<<<<< HEAD
               memory: 512Mi
+=======
+              memory: 256Mi
+>>>>>>> f559d3e93c09564091dcfc2a65b207092ba6db4f
             requests:
-              cpu: 200m
-              memory: 150Mi
+              cpu: 50m
+              memory: 128Mi
