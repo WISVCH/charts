@@ -86,9 +86,9 @@ spec:
           - name: TZ
             value: Europe/Amsterdam
           resources:
-            limits:
-              cpu: 200m
-              memory: 256Mi
             requests:
-              cpu: 50m
-              memory: 150Mi
+              cpu: 15m
+              memory: 549M
+            limits:
+              cpu: 15m
+              memory: 566M

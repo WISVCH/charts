@@ -120,9 +120,9 @@ spec:
           - name: MAILNOTIFICATIONS_TO_EDUCATION_C_S
             value: {{.Values.mail.notifications.to.educationCS}}
           resources:
-            limits:
-              cpu: 200m
-              memory: 256Mi
             requests:
-              cpu: 50m
-              memory: 192Mi
+              cpu: 15m
+              memory: 381M
+            limits:
+              cpu: 15m
+              memory: 392M
