@@ -138,7 +138,7 @@ spec:
 
             # Replace DB_PORT with the port the proxy should listen on
             - "--port={{.Values.postgres.port}}"
-            - "events_cloud_sql"
+            - "wisvch:europe-west4:cluster-db"
 
           securityContext:
             # The default Cloud SQL proxy image runs as the
