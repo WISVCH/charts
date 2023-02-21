@@ -129,6 +129,7 @@ spec:
           image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.0.0
           args:
             - "--structured-logs"
+            - "--private-ip"
             - "--port={{.Values.postgres.port}}"
             - "-i" # Enables automatic authentication through the serviceaccount
             - "wisvch:europe-west4:cluster-db"
