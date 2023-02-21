@@ -62,7 +62,7 @@ spec:
           - name: SPRING_MAIN_LAZY_INITIALIZATION
             value: "true"
           - name: JAVA_OPTS
-            value: -Xms128m -Xmx256m
+            value: -Xms128m -Xmx512m
           - name: SPRING_DATASOURCE_USERNAME
             value: {{ .Values.postgres.username}}
           - name: SPRING_DATASOURCE_PASSWORD
