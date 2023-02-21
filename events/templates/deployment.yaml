@@ -120,10 +120,9 @@ spec:
             value: {{.Values.mollie.key}}
           resources:
             limits:
-              cpu: 500m
               memory: 512Mi
             requests:
-              cpu: 200m
+              cpu: 50m
               memory: 150Mi
         {{- if eq .Values.postgres.cloudSQL true }}
         - name: cloud-sql-proxy
