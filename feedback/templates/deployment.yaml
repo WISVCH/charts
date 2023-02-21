@@ -36,7 +36,7 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: http
-            initialDelaySeconds: 300
+            initialDelaySeconds: 360
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 5
@@ -44,7 +44,7 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: http
-            initialDelaySeconds: 300
+            initialDelaySeconds: 360
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 5
@@ -121,8 +121,8 @@ spec:
             value: {{.Values.mail.notifications.to.educationCS}}
           resources:
             requests:
-              cpu: 40m
+              cpu: 15m
               memory: 392M
             limits:
-              cpu: 40m
+              cpu: 50m
               memory: 392M
