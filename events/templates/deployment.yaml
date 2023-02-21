@@ -130,7 +130,7 @@ spec:
           args:
             - "--structured-logs"
             - "--port={{.Values.postgres.port}}"
-            - "--auto-iam-authn cluster-db"
+            - "-i" # Enables automatic authentication through the serviceaccount
             - "wisvch:europe-west4:cluster-db"
           securityContext:
             runAsNonRoot: true
