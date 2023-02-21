@@ -59,8 +59,6 @@ spec:
             value: 64MB
           - name: SPRING_SERVLET_MULTIPART_MAX_fILE_SIZE
             value: 64MB
-          - name: SPRING_MAIN_LAZY_INITIALIZATION
-            value: "true"
           - name: JAVA_OPTS
             value: -Xms128m -Xmx512m
           - name: SPRING_DATASOURCE_USERNAME
