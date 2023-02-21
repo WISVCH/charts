@@ -49,3 +49,4 @@ postgres:
   host: ""
   port: 5432
   database: events
+  cloudSQL: true
