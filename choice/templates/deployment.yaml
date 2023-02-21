@@ -36,7 +36,7 @@ spec:
             httpGet:
               path: /actuator/health/liveness
               port: http
-            initialDelaySeconds: 210
+            initialDelaySeconds: 300
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 5
@@ -44,7 +44,7 @@ spec:
             httpGet:
               path: /actuator/health/readiness
               port: http
-            initialDelaySeconds: 210
+            initialDelaySeconds: 300
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 5
@@ -89,8 +89,8 @@ spec:
             value: Europe/Amsterdam
           resources:
             requests:
-              cpu: 15m
-              memory: 500M
+              cpu: 30m
+              memory: 566M
             limits:
               cpu: 30m
               memory: 566M
