@@ -80,13 +80,12 @@ spec:
             value: 5mb
           - name: JAVA_OPTS
             value: -Xms128m -Xmx192m
-        {{- if eq .Values.postgres.cloudSQL true }}
+          - name: SPRING_DATASOURCE_USERNAME
+            value: {{.Values.postgres.username}}
+          - name: SPRING_DATASOURCE_PASSWORD
+            value: {{.Values.postgres.password}}
           - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}?user={{.Values.postgres.username}}
-        {{- else}}
-        - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}?user={{.Values.postgres.username}}&password={{.Values.postgres.password}}
-        {{- end }}
+            value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
           - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
             value: {{.Values.hibernate.hb2mddl.auto}}
           - name: SPRING_JPA_GENERATE_DDL
