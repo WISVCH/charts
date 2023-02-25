@@ -71,9 +71,9 @@ spec:
           - name: SPRING_MAIL_PASSWORD
             value: {{.Values.mail.password}}
           - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
-            value: {{.Values.mail.auth | quote}}
+            value: "true"
           - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
-            value: {{.Values.mail.starttls | quote}}
+            value: "true"
           - name: SPRING_PROFILES_ACTIVE
             value: production
           - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE

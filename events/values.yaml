@@ -20,8 +20,6 @@ mail:
   port: 25
   username: ""
   password: ""
-  auth: true
-  starttls: true
 
 hibernate:
   generateDdl: false
