@@ -66,9 +66,9 @@ spec:
           - name: SPRING_MAIL_PASSWORD
             value: {{.Values.mail.password}}
           - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
-            value: "true"
+            value: {{ default "true" .Values.mail.auth | quote}}
           - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
-            value: "true"
+            value: {{ default "true" .Values.mail.starttls | quote}}
           - name: SPRING_PROFILES_ACTIVE
             value: production
           - name: JAVA_OPTS
