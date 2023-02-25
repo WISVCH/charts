@@ -37,7 +37,7 @@ mail:
   username: ""
   password: ""
   auth: true
-  starttls: true
+  starttls: false
   notifications:
     from: noreply@ch.tudelft.nl
     to:
