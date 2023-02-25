@@ -21,7 +21,7 @@ mail:
   username: ""
   password: ""
   auth: true
-  starttls: false
+  starttls: true
 
 hibernate:
   generateDdl: false
