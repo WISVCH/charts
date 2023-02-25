@@ -36,6 +36,8 @@ mail:
   port: 587
   username: ""
   password: ""
+  auth: "true"
+  tls: "true"
   notifications:
     from: noreply@ch.tudelft.nl
     to:
