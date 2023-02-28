@@ -1,4 +1,4 @@
-name: ""
+fullnameOverride: ""
 
 tlsSecret: ""
 domain: cod.wisv.ch
