@@ -1,0 +1,15 @@
+name: ""
+
+tlsSecret: ""
+domain: cod.wisv.ch
+
+replicaCount: 1
+containerPort: 3000
+service:
+  type: ClusterIP
+  port: 80
+image:
+  repository: "ghcr.io/wisvch/"
+  tag: latest
+  pullPolicy: IfNotPresent
+  pullSecrets: {}
