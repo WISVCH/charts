@@ -47,5 +47,5 @@ Selector labels
 */}}
 {{- define "static-site.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "static-site.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}-{{ .edition }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
