@@ -2,10 +2,10 @@ fullnameOverride: ""
 
 tlsSecret: ""
 domains: 
-  - "symposium.ch.tudelft.nl"
-  - "eerstejaarsweekend.nl"
-  - "coh.ewi.tudelft.nl"
-  - "commissies.ch.tudelft.nl"
+  - symposium.ch.tudelft.nl
+  - eerstejaarsweekend.nl
+  - coh.ewi.tudelft.nl
+  - commissies.ch.tudelft.nl
 
 replicaCount: 1
 containerPort: 8080
