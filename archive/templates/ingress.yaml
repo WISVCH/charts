@@ -13,7 +13,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: {{ include "archive.fullname" $ }}-{{ $.Values.defaultEdition }}
+                name: {{ include "archive.fullname" $ }}-{{ $domain }}
                 port:
                   name: http
     {{- end }}
