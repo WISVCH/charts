@@ -13,13 +13,15 @@ spec:
             path: "/"
             backend:
               service:
-                name: {{ include "archive.fullname" $ }}-{{ regexReplaceAll "\\W+" $domain "-"}} # Replaces special chars with _
+                name: {{ include "archive.fullname" $ }}-{{ regexReplaceAll "\\W+" $domain "-"}} # Replaces special chars with -
                 port:
                   name: http
     {{- end }}
   {{- if .Values.tlsSecret }}
   tls:
   - hosts:
-      - {{ .Values.domain }}
+    {{- range $domain := $.Values.domains}}
+      - {{ $domain }}
+    {{- end }}
     secretName: {{ .Values.tlsSecret }}
   {{- end}}
