@@ -13,7 +13,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: {{ include "archive.fullname" $ }}-{{ regexReplaceAll "\\W+" $domain "-"}} # Replaces special chars with -
+                name: {{ include "archive.fullname" $ }}
                 port:
                   name: http
     {{- end }}
