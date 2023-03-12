@@ -56,7 +56,7 @@ spec:
           - name: SERVER_ADDRESS
             value: "0.0.0.0"
           - name: SERVER_FORWARD_HEADERS_STRATEGY
-            value: "native"
+            value: framework
           - name: SPRING_MAIL_HOST
             value: {{.Values.mail.host}}
           - name: SPRING_MAIL_PORT
