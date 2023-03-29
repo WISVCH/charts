@@ -46,6 +46,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "static-site.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "static-site.name" . }}
+app.kubernetes.io/name: {{ include "static-site.fullname" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
