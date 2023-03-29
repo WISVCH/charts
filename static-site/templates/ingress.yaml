@@ -5,6 +5,28 @@ metadata:
   name: {{ include "static-site.fullname" . }}
 spec:
   rules:
+  {{- if $.Values.domain}}
+  {{- range $domain := .Values.domains}}
+    - host: {{ $domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ include "static-site.fullname" $ }}-{{ $domain | replace "." "-" }}
+                port:
+                  name: http
+    {{- end }}
+  {{- if $.Values.tlsSecret }}
+  tls:
+  - hosts:
+    {{- range $domain := $.Values.domains}}
+      - {{ $domain }}
+    {{- end }}
+    secretName: {{ $.Values.tlsSecret }}
+  {{- end}}
+  {{- else}}
     - host: {{ .Values.domain }}
       http:
         paths:
@@ -20,4 +42,5 @@ spec:
   - hosts:
       - {{ .Values.domain }}
     secretName: {{ .Values.tlsSecret }}
+  {{- end}}
   {{- end}}
