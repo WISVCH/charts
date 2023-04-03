@@ -22,5 +22,18 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         command: ["./listmonk", "--install", "--yes"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+          - name: LISTMONK_db__host
+            value: {{ .Values.postgres.host }}
+          - name: LISTMONK_db__port
+            value: {{ .Values.postgres.port | quote }}
+          - name: LISTMONK_db__user
+            value: {{ .Values.postgres.user }}
+          - name: LISTMONK_db__password
+            value: {{ .Values.postgres.password }}
+          - name: LISTMONK_db__database
+            value: {{ .Values.postgres.name }}
+          - name: LISTMONK_db__ssl_mode
+            value: disable
 
 {{ end }}
