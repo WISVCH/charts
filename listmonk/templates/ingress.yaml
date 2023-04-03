@@ -1,0 +1,28 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "listmonk.fullname" . }}
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "https://{{ .Values.authDomain }}/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://{{ .Values.authDomain }}/oauth2/start?rd=$escaped_request_uri"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ include "listmonk.fullname" $ }}
+                port:
+                  name: http
+  {{- if .Values.tlsSecret }}
+  tls:
+  - hosts:
+      - {{ .Values.domain }}
+    secretName: {{ .Values.tlsSecret }}
+  {{- end}}

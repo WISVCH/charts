@@ -13,6 +13,10 @@ service:
   type: ClusterIP
   port: 80
 
+domain: list.wisv.ch
+authDomain: authproxy.wisv.ch
+tlsSecret: 
+
 app:
   adress: 0.0.0.0:9000
   admin: 
