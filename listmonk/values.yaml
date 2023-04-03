@@ -1,0 +1,27 @@
+replicaCount: 1
+image:
+  repository: listmonk/listmonk
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+podAnnotations: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+app:
+  adress: 0.0.0.0:9000
+  admin: 
+    username: 
+    password: 
+postgres:
+  user: ""
+  password: ""
+  name: listmonk
+  host: ""
+  port: 5432
+  initTables: false

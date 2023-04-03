@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "listmonk.fullname" . }}
+  labels:
+    {{- include "listmonk.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      {{- include "listmonk.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "listmonk.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: LISTMONK_app__address
+            value: {{ .Values.app.adress }}
+          - name: LISTMONK_app__admin_username
+            value: {{ .Values.app.admin.username }}
+          - name: LISTMONK_app__admin_password
+            value: {{ .Values.app.admin.password }}
+          - name: LISTMONK_db__host
+            value: {{ .Values.postgres.host }}
+          - name: LISTMONK_db__port
+            value: {{ .Values.postgres.port | quote }}
+          - name: LISTMONK_db__user
+            value: {{ .Values.postgres.user }}
+          - name: LISTMONK_db__password
+            value: {{ .Values.postgres.password }}
+          - name: LISTMONK_db__database
+            value: {{ .Values.postgres.name }}
+          - name: LISTMONK_db__ssl_mode
+            value: disable
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
