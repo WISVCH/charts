@@ -18,9 +18,7 @@ authDomain: authproxy.wisv.ch
 tlsSecret: 
 
 allowedGroups:
-  - listmonk
   - chbeheer
-  - bestuur
 
 app:
   adress: 0.0.0.0:9000
