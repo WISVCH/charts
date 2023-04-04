@@ -17,8 +17,7 @@ domain: list.wisv.ch
 authDomain: authproxy.wisv.ch
 tlsSecret: 
 
-allowedGroups:
-  - chbeheer
+allowedGroup: chbeheer
 
 app:
   adress: 0.0.0.0:9000
