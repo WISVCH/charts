@@ -5,7 +5,7 @@ metadata:
   name: {{ include "listmonk.fullname" . }}
   namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: "https://{{ .Values.authDomain }}/oauth2/auth?allowed_groups={{ .Values.allowedGroup }}"
+    nginx.ingress.kubernetes.io/auth-url: "https://{{ .Values.authDomain }}/oauth2/auth{{- printf "?allowed_groups=%s"  (join "," .Values.allowedGroups) }}"
     nginx.ingress.kubernetes.io/auth-signin: "https://{{ .Values.authDomain }}/oauth2/start?rd=https://{{ .Values.domain }}$escaped_request_uri"
 spec:
   ingressClassName: nginx
