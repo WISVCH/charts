@@ -55,35 +55,35 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/subscription/*"
+            path: "/subscription/"
             backend:
               service:
                 name: {{ include "listmonk.fullname" $ }}
                 port:
                   name: http
           - pathType: Prefix
-            path: "/link/*"
+            path: "/link/"
             backend:
               service:
                 name: {{ include "listmonk.fullname" $ }}
                 port:
                   name: http
           - pathType: Prefix
-            path: "/campaign/*"
+            path: "/campaign/"
             backend:
               service:
                 name: {{ include "listmonk.fullname" $ }}
                 port:
                   name: http
           - pathType: Prefix
-            path: "/public/*"
+            path: "/public/"
             backend:
               service:
                 name: {{ include "listmonk.fullname" $ }}
                 port:
                   name: http
           - pathType: Prefix
-            path: "/webhooks/service/*"
+            path: "/webhooks/service/"
             backend:
               service:
                 name: {{ include "listmonk.fullname" $ }}
