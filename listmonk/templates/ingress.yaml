@@ -83,6 +83,13 @@ spec:
                 port:
                   name: http
           - pathType: Prefix
+            path: "/archive/"
+            backend:
+              service:
+                name: {{ include "listmonk.fullname" $ }}
+                port:
+                  name: http
+          - pathType: Prefix
             path: "/webhooks/service/"
             backend:
               service:
