@@ -5,8 +5,17 @@ metadata:
   name: {{ include "listmonk.fullname" . }}
   namespace: default
   annotations:
+    nginx.ingress.kubernetes.io/auth-response-headers: Authorization
     nginx.ingress.kubernetes.io/auth-url: "https://{{ .Values.authDomain }}/oauth2/auth{{- printf "?allowed_groups=%s"  (join "," .Values.allowedGroups) }}"
     nginx.ingress.kubernetes.io/auth-signin: "https://{{ .Values.authDomain }}/oauth2/start?rd=https://{{ .Values.domain }}$escaped_request_uri"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      auth_request_set $name_upstream_1 $upstream_cookie_name_1;
+      
+      access_by_lua_block {
+        if ngx.var.name_upstream_1 ~= "" then
+          ngx.header["Set-Cookie"] = "name_1=" .. ngx.var.name_upstream_1 .. ngx.var.auth_cookie:match("(; .*)")
+        end
+      }
 spec:
   ingressClassName: nginx
   rules:
