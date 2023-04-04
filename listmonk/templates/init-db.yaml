@@ -14,13 +14,13 @@ spec:
     metadata:
       labels:
         {{- include "listmonk.selectorLabels" . | nindent 8 }}
-        job: "init-db"
+        job: "upgrade-db" 
     spec:
       restartPolicy: Never
       containers:
-      - name: init-db
+      - name: upgrade-db
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-        command: ["./listmonk", "--install", "--yes"]
+        command: ["./listmonk", "--upgrade", "--yes"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
           - name: LISTMONK_db__host

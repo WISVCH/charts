@@ -32,4 +32,4 @@ postgres:
   name: listmonk
   host: ""
   port: 5432
-  initTables: false
+  initOrUpgradeTables: True # Intializes or upgrades the database without overwriting the current tables. Save to keep on!
