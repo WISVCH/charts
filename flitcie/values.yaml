@@ -1,0 +1,21 @@
+replicaCount: 1
+image:
+  repository: ghcr.io/gbbirkisson/spis
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+podAnnotations: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+domain: flitcie.wisv.ch
+authDomain: authproxy.wisv.ch
+tlsSecret: 
+
+processing_schedule: 0 0 2 * * *
+process_on_start: false

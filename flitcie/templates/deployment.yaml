@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "flitcie.fullname" . }}
+  labels:
+    {{- include "flitcie.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      {{- include "flitcie.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "flitcie.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: SPIS_MEDIA_DIR
+            value: /flitcie/media
+          - name: SPIS_DATA_DIR
+            value: /flitcie/appdata
+          - name: SPIS_PROCESSING_SCHEDULE
+            value: {{ .Values.processing_schedule }}
+          - name: SPIS_PROCESSING_RUN_ON_START
+            value: {{ .Values.process_on_start }}
+          - name: SPIS_SERVER_ADDRESS
+            value: 0.0.0.0:9000
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            requests:
+              cpu: 10m
+              memory: 20Mi
+          volumeMounts:
+          - mountPath: /flitcie/media
+            name: flitcie-media
+          - mountPath: /flitcie/appdata
+            name: flitcie-appdata
+      volumes:
+        - name: flitcie-media
+          persistentVolumeClaim:
+            claimName: {{ include "flitcie.fullname" . }}-media
+        - name: flitcie-appdata
+          persistentVolumeClaim:
+            claimName: {{ include "flitcie.fullname" . }}-appdata

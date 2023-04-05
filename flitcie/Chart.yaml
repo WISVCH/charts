@@ -1,0 +1,6 @@
+apiVersion: v2
+name: flitcie
+description: The place to look at all CH event photos
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
