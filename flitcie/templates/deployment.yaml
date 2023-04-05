@@ -34,11 +34,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
           - name: SPIS_MEDIA_DIR
-            value: /flitcie/media
+            value: "/flitcie/media"
           - name: SPIS_DATA_DIR
-            value: /flitcie/appdata
+            value: "/flitcie/appdata"
           - name: SPIS_PROCESSING_SCHEDULE
-            value: {{ .Values.processing_schedule }}
+            value: {{ .Values.processing_schedule | quote }}
           - name: SPIS_PROCESSING_RUN_ON_START
             value: {{ .Values.process_on_start }}
           - name: SPIS_SERVER_ADDRESS
