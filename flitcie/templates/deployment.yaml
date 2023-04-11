@@ -33,16 +33,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: SPIS_MEDIA_DIR
-            value: "/flitcie/media"
-          - name: SPIS_DATA_DIR
-            value: "/flitcie/appdata"
-          - name: SPIS_PROCESSING_SCHEDULE
-            value: {{ .Values.processing_schedule | quote }}
-          - name: SPIS_PROCESSING_RUN_ON_START
-            value: {{ .Values.process_on_start | quote }}
-          - name: SPIS_SERVER_ADDRESS
-            value: 0.0.0.0:9000
+          - name: TZ
+            value: Europe/Amsterdam
           ports:
             - name: http
               containerPort: 9000
@@ -60,9 +52,9 @@ spec:
               cpu: 10m
               memory: 20Mi
           volumeMounts:
-          - mountPath: /flitcie/media
+          - mountPath: /gallery
             name: flitcie-media
-          - mountPath: /flitcie/appdata
+          - mountPath: /config
             name: flitcie-appdata
       volumes:
         - name: flitcie-media
