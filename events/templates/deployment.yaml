@@ -112,7 +112,7 @@ spec:
             value: {{.Values.oauth.groups.admin}}
           - name: WISVCH_CONNECT_BETA_USERS
             value: {{.Values.oauth.groups.beta}}
-          - name: WISVCH_CONNECT_CLAIM_NAME
+          - name: WISVCH_CONNECT_CLAIMNAME
             value: {{.Values.oauth.claimName}}
           - name: WISVCH_EVENTS_IMAGE_PATH
             value: https://events.wisv.ch/api/v1/documents/
