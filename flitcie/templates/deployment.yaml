@@ -24,6 +24,7 @@ spec:
       labels:
         {{- include "flitcie.selectorLabels" . | nindent 8 }}
     spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -35,6 +36,10 @@ spec:
           env:
           - name: TZ
             value: Europe/Amsterdam
+          - name: PUID
+            value: 1001
+          - name: PGID
+            value: 1001
           ports:
             - name: http
               containerPort: 80
@@ -56,6 +61,24 @@ spec:
             name: flitcie-media
           - mountPath: /config
             name: flitcie-appdata
+      {{- if eq .Values.mysql.cloudSQL true }}
+        - name: cloud-sql-proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.0.0
+          args:
+            - "--structured-logs"
+            - "--private-ip"
+            - "--port={{.Values.mysql.port}}"
+            - "-i" # Enables automatic authentication through the serviceaccount
+            - "wisvch:europe-west4:cluster-mysql-db"
+          securityContext:
+            runAsNonRoot: true
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 20m
+              memory: 100Mi
+          {{- end}}
       volumes:
         - name: flitcie-media
           persistentVolumeClaim:
@@ -63,3 +86,4 @@ spec:
         - name: flitcie-appdata
           persistentVolumeClaim:
             claimName: {{ include "flitcie.fullname" . }}-appdata
+    

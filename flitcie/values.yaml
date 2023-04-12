@@ -16,3 +16,9 @@ service:
 domain: flitcie.wisv.ch
 authDomain: authproxy.wisv.ch
 tlsSecret: 
+
+serviceAccountName: flitcie
+
+mysql:
+  port: 3306
+  cloudSQL: true
