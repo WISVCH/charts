@@ -34,12 +34,12 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: TZ
-            value: Europe/Amsterdam
-          - name: PUID
-            value: 1001
-          - name: PGID
-            value: 1001
+            - name: TZ
+              value: Europe/Amsterdam
+            - name: PUID
+              value: 1001
+            - name: PGID
+              value: 1001
           ports:
             - name: http
               containerPort: 80
@@ -57,10 +57,10 @@ spec:
               cpu: 10m
               memory: 20Mi
           volumeMounts:
-          - mountPath: /gallery
-            name: flitcie-media
-          - mountPath: /config
-            name: flitcie-appdata
+            - mountPath: /gallery
+              name: flitcie-media
+            - mountPath: /config
+              name: flitcie-appdata
       {{- if eq .Values.mysql.cloudSQL true }}
         - name: cloud-sql-proxy
           image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.0.0
@@ -77,7 +77,7 @@ spec:
               memory: 200Mi
             requests:
               cpu: 20m
-              memory: 100Mi
+              memory: 10Mi
           {{- end}}
       volumes:
         - name: flitcie-media

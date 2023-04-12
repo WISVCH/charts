@@ -50,76 +50,76 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
           env:
-          - name: MANAGEMENT_CONTEXT_PATH
-            value: /management
-          - name: MANAGEMENT_ENDPOINTS_ENABLED
-            value: "false"
-          - name: MANAGEMENT_ENDPOINTS_HEALTH_ENABLED
-            value: "true"
-          - name: SERVER_PORT
-            value: "8080"
-          - name: SERVER_SERVLET_CONTEXT_PATH
-            value: "/"
-          - name: SERVER_ADDRESS
-            value: "0.0.0.0"
-          - name: SPRING_MAIL_HOST
-            value: {{.Values.mail.host}}
-          - name: SPRING_MAIL_PORT
-            value: {{.Values.mail.port | quote}}
-          - name: SPRING_MAIL_USERNAME
-            value: {{.Values.mail.username}}
-          - name: SPRING_MAIL_PASSWORD
-            value: {{.Values.mail.password}}
-          - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
-            value: "true"
-          - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
-            value: "true"
-          - name: SPRING_PROFILES_ACTIVE
-            value: production
-          - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
-            value: 5mb
-          - name: JAVA_OPTS
-            value: -Xms128m -Xmx192m
-          - name: SPRING_DATASOURCE_USERNAME
-            value: {{.Values.postgres.username}}
-          - name: SPRING_DATASOURCE_PASSWORD
-            value: {{.Values.postgres.password}}
-          - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
-          - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
-            value: {{.Values.hibernate.hb2mddl.auto}}
-          - name: SPRING_JPA_GENERATE_DDL
-            value: {{.Values.hibernate.generateDdl | quote}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
-            value: {{.Values.oauth.issuer}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI
-            value: {{.Values.oauth.client.url}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
-            value: {{.Values.oauth.client.id}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
-            value: {{.Values.oauth.client.secret}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
-            value: {{.Values.oauth.scope}}
-          - name: SPRING_FLYWAY_ENABLED
-            value: {{.Values.flyway.enabled | quote}}
-          - name: SPRING_FLYWAY_SCHEMAS
-            value: event
-          - name: SPRING_FLYWAY_TABLE
-            value: schema_version
-          - name: TZ
-            value: Europe/Amsterdam
-          - name: WISVCH_CONNECT_ADMIN_GROUPS
-            value: {{.Values.oauth.groups.admin}}
-          - name: WISVCH_CONNECT_BETA_USERS
-            value: {{.Values.oauth.groups.beta}}
-          - name: WISVCH_CONNECT_CLAIM_NAME
-            value: {{.Values.oauth.claimName}}
-          - name: WISVCH_EVENTS_IMAGE_PATH
-            value: https://events.wisv.ch/api/v1/documents/
-          - name: MOLLIE_CLIENTURI
-            value: https://events.wisv.ch
-          - name: MOLLIE_APIKEY
-            value: {{.Values.mollie.key}}
+            - name: MANAGEMENT_CONTEXT_PATH
+              value: /management
+            - name: MANAGEMENT_ENDPOINTS_ENABLED
+              value: "false"
+            - name: MANAGEMENT_ENDPOINTS_HEALTH_ENABLED
+              value: "true"
+            - name: SERVER_PORT
+              value: "8080"
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: "/"
+            - name: SERVER_ADDRESS
+              value: "0.0.0.0"
+            - name: SPRING_MAIL_HOST
+              value: {{.Values.mail.host}}
+            - name: SPRING_MAIL_PORT
+              value: {{.Values.mail.port | quote}}
+            - name: SPRING_MAIL_USERNAME
+              value: {{.Values.mail.username}}
+            - name: SPRING_MAIL_PASSWORD
+              value: {{.Values.mail.password}}
+            - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
+              value: "true"
+            - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
+              value: "true"
+            - name: SPRING_PROFILES_ACTIVE
+              value: production
+            - name: SPRING_HTTP_MULTIPART_MAX_FILE_SIZE
+              value: 5mb
+            - name: JAVA_OPTS
+              value: -Xms128m -Xmx192m
+            - name: SPRING_DATASOURCE_USERNAME
+              value: {{.Values.postgres.username}}
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: {{.Values.postgres.password}}
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
+            - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
+              value: {{.Values.hibernate.hb2mddl.auto}}
+            - name: SPRING_JPA_GENERATE_DDL
+              value: {{.Values.hibernate.generateDdl | quote}}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
+              value: {{.Values.oauth.issuer}}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENTURI
+              value: {{.Values.oauth.client.url}}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
+              value: {{.Values.oauth.client.id}}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
+              value: {{.Values.oauth.client.secret}}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
+              value: {{.Values.oauth.scope}}
+            - name: SPRING_FLYWAY_ENABLED
+              value: {{.Values.flyway.enabled | quote}}
+            - name: SPRING_FLYWAY_SCHEMAS
+              value: event
+            - name: SPRING_FLYWAY_TABLE
+              value: schema_version
+            - name: TZ
+              value: Europe/Amsterdam
+            - name: WISVCH_CONNECT_ADMIN_GROUPS
+              value: {{.Values.oauth.groups.admin}}
+            - name: WISVCH_CONNECT_BETA_USERS
+              value: {{.Values.oauth.groups.beta}}
+            - name: WISVCH_CONNECT_CLAIM_NAME
+              value: {{.Values.oauth.claimName}}
+            - name: WISVCH_EVENTS_IMAGE_PATH
+              value: https://events.wisv.ch/api/v1/documents/
+            - name: MOLLIE_CLIENTURI
+              value: https://events.wisv.ch
+            - name: MOLLIE_APIKEY
+              value: {{.Values.mollie.key}}
           resources:
             limits:
               memory: 512Mi
