@@ -37,21 +37,13 @@ spec:
             - name: TZ
               value: Europe/Amsterdam
             - name: PUID
-              value: 1001
+              value: "1001"
             - name: PGID
-              value: 1001
+              value: "1001"
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
           resources:
             requests:
               cpu: 10m
