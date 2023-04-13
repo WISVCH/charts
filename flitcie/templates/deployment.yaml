@@ -33,6 +33,10 @@ spec:
           env:
             - name: TZ
               value: Europe/Amsterdam
+            - name: PUID
+              value: "1001"
+            - name: GUID
+              value: "1001"
           ports:
             - name: http
               containerPort: 80
