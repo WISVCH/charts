@@ -11,10 +11,7 @@ spec:
     matchLabels:
       {{- include "flitcie.selectorLabels" . | nindent 6 }}
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 0
+    type: Recreate
   template:
     metadata:
       {{- with .Values.podAnnotations }}
