@@ -3,6 +3,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "areafiftylan-legacy.fullname" . }}
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   rules:
     {{- range $domain := .Values.domains}}
