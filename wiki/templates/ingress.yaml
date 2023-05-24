@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "wiki.fullname" . }}
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.global-static-ip-name: gce-load-balancer
+    networking.gke.io/managed-certificates: iap-cert
+spec:
+  rules:
+    - host: {{ .Values.domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: {{ include "wiki.fullname" $ }}
+                port:
+                  name: http
+  {{- if .Values.tlsSecret }}
+  tls:
+  - hosts:
+      - {{ .Values.domain }}
+    secretName: {{ .Values.tlsSecret }}
+  {{- end}}
