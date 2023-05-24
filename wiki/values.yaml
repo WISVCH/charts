@@ -6,7 +6,7 @@ domain: wiki.wisv.ch
 tlsSecret: ""
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
 
 image:
