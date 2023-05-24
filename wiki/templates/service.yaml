@@ -4,6 +4,9 @@ metadata:
   name: {{ include "wiki.fullname" . }}
   labels:
     {{- include "wiki.labels" . | nindent 4 }}
+  annotations:
+    cloud.google.com/backend-config: '{"default": "ch-iap-backendconfig"}'
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: {{ .Values.service.type }}
   ports:
