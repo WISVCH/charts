@@ -134,7 +134,7 @@ spec:
             - "--private-ip"
             - "--port={{.Values.postgres.port}}"
             - "-i" # Enables automatic authentication through the serviceaccount
-            - "wisvch:europe-west4:cluster-db"
+            - "wisvch:europe-west4:geurt"
           securityContext:
             runAsNonRoot: true
           resources:
