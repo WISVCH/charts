@@ -9,13 +9,13 @@ spec:
   replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      {{- include "wiki.selectorLabels" . | nindent 6 }}
+      run: {{ include "wiki.fullname" . }}
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        {{- include "wiki.selectorLabels" . | nindent 8 }}
+        run: {{ include "wiki.fullname" . }}
     spec:
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
