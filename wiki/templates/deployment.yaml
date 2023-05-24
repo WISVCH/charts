@@ -9,13 +9,13 @@ spec:
   replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      run: {{ include "wiki.fullname" . }}
+      run: wiki
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        run: {{ include "wiki.fullname" . }}
+        run: wiki
     spec:
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:

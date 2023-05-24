@@ -15,4 +15,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    run: {{ include "wiki.fullname" . }}
+    run: wiki
