@@ -5,6 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: {{ include "listmonk.fullname" . }}-pvc
   resources:
     requests:
       storage: 1Gi
