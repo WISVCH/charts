@@ -52,3 +52,11 @@ spec:
             requests:
               cpu: 50m
               memory: 100Mi
+          volumeMounts:
+          - mountPath: /key.json
+            name: service-account-key
+      volumes:
+        - name: service-account-key
+          secret:
+            secretName: connect2-service-account-key
+        
