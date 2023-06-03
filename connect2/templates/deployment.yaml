@@ -17,6 +17,7 @@ spec:
       labels:
         run: connect2
     spec:
+      serviceAccountName: connect2
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
