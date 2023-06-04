@@ -35,10 +35,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
-              value: /key.json
+              value: /secret/key.json
           volumeMounts:
-            - mountPath: /key.json
+            - mountPath: /secret/key.json
               name: service-account-key
+              subPath: key.json
               readOnly: true
           ports:
             - name: http
