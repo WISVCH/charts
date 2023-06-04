@@ -53,7 +53,7 @@ spec:
               cpu: 50m
               memory: 100Mi
           volumeMounts:
-          - mountPath: /var/www/dokuwiki
+          - mountPath: /var/www/dokuwiki/data
             name: wiki2-volume
       volumes:
         - name: wiki2-volume
