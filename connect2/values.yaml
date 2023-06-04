@@ -5,6 +5,9 @@ domain: connect2.wisv.ch
 
 tlsSecret: ""
 
+serviceAccountSecretName: ""
+serviceAccountSecretKey: ""
+
 # No ingress for now
 # service:
 #   type: NodePort
