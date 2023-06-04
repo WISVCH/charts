@@ -9,13 +9,13 @@ spec:
   replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      run: connect2
+      {{- include "connect2.selectorLabels" . | nindent 6 }}
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        run: connect2
+        {{- include "connect2.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: connect2
       {{- with .Values.image.pullSecrets }}
