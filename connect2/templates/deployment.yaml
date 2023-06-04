@@ -17,7 +17,6 @@ spec:
       labels:
         {{- include "connect2.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: connect2
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
