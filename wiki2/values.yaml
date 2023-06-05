@@ -15,7 +15,5 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets: {}
 
-oauth:
-  client:
-    id: ""
-    secret: ""
+connect2:
+  host: connect2:80

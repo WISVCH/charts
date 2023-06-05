@@ -52,6 +52,9 @@ spec:
             requests:
               cpu: 50m
               memory: 100Mi
+          env:
+          - name: CONNECT2_HOST
+            value: {{.Values.connect2.host}}
           volumeMounts:
           - mountPath: /var/www/dokuwiki/data
             name: wiki2-volume
