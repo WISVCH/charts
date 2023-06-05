@@ -12,7 +12,6 @@ serviceAccountSecretKey: ""
 service:
   type: ClusterIP
   port: 80
-  ip: 10.24.13.2
 
 image:
   repository: ghcr.io/wisvch/connect2

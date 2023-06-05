@@ -7,7 +7,6 @@ metadata:
     {{- include "connect2.labels" . | nindent 4 }}
 spec:
   type: {{ default "ClusterIP" .Values.service.type | quote }}
-  clusterIP: {{ .Values.service.ip }}
   ports:
     - name: http
       protocol: TCP
