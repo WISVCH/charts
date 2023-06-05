@@ -54,9 +54,9 @@ spec:
               memory: 100Mi
           volumeMounts:
           - mountPath: /var/www/dokuwiki/data
-            name: wiki2-data
+            name: wiki2-volume
       volumes:
-        - name: wiki2-data
+        - name: wiki2-volume
           persistentVolumeClaim:
             claimName: {{ include "wiki2.fullname" . }}
 
