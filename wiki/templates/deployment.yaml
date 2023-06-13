@@ -46,10 +46,8 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
           env:
-          - name: WISVCH_CONNECT_CLIENT_ID
-            value: {{.Values.oauth.client.id}}
-          - name: WISVCH_CONNECT_CLIENT_SECRET
-            value: {{.Values.oauth.client.secret}}
+          - name: CONNECT2_HOST
+            value: {{.Values.connect2.host}}
           resources:
             limits:
               cpu: 100m
