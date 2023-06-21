@@ -37,7 +37,8 @@ oauth:
   groups:
     admin: chbeheer,dienst2,epa,vc
     beta: svenp, florisv, daveys, davida, ruthk, gijsw, karimo, willemijnv, svenh, jurriaant, yoshia, joepj, juliand
-
+links:
+  gtc: "https://ch.tudelft.nl/wp-content/uploads/Deelnemersvoorwaarden_versie_12_06_2023.pdf" 
 mollie:
   key: ""
 
