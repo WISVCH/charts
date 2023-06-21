@@ -120,6 +120,8 @@ spec:
               value: https://events.wisv.ch
             - name: MOLLIE_APIKEY
               value: {{.Values.mollie.key}}
+            - name: LINKS_GTC
+              value: {{.Values.links.gtc}}
           resources:
             limits:
               memory: 512Mi
