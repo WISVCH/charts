@@ -19,13 +19,11 @@ spec:
                   name: http
   {{- end }}
   {{- end }}
-  {{- range $key, $ingress := .Values.ingress}}
-  {{- if $ingress.tlsSecret }}
   tls:
-  - hosts:
-    {{- range $ingress.domains}}
-      - {{ . }}
-    {{- end }}
-    secretName: {{ $ingress.tlsSecret }}
-  {{- end}}
+  {{- range $key, $ingress := .Values.ingress}}
+    - hosts:
+      {{- range $ingress.domains}}
+        - {{ . }}
+      {{- end }}
+      secretName: {{ $ingress.tlsSecret }}
   {{- end }}
