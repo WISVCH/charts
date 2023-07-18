@@ -7,7 +7,7 @@ spec:
   rules:
   {{- range $key, $ingress := .Values.ingress}}
   {{- range $ingress.domains}}
-    - host: {{ $key }}
+    - host: {{ . }}
       http:
         paths:
           - pathType: Prefix
