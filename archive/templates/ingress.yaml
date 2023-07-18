@@ -5,8 +5,9 @@ metadata:
   name: {{ include "archive.fullname" . }}
 spec:
   rules:
-{{- range $domain := .Values.domains}}
-    - host: {{ $domain }}
+  {{- range $key, $ingress := .Values.ingress}}
+  {{- range $ingress.domains}}
+    - host: {{ $key }}
       http:
         paths:
           - pathType: Prefix
@@ -16,12 +17,15 @@ spec:
                 name: {{ include "archive.fullname" $ }}
                 port:
                   name: http
-    {{- end }}
-  {{- if .Values.tlsSecret }}
+  {{- end }}
+  {{- end }}
+  {{- range $key, $ingress := .Values.ingress}}
+  {{- if $ingress.tlsSecret }}
   tls:
   - hosts:
-    {{- range $domain := $.Values.domains}}
-      - {{ $domain }}
+    {{- range $ingress.domains}}
+      - {{ . }}
     {{- end }}
-    secretName: {{ .Values.tlsSecret }}
+    secretName: {{ $ingress.tlsSecret }}
   {{- end}}
+  {{- end }}
