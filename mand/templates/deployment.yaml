@@ -65,12 +65,14 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /healthz
+              port: 8080
+              scheme: HTTP
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /healthz
+              port: 8080
+              scheme: HTTP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
