@@ -35,6 +35,8 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /secret/key.json
+            - name: CUSTOMER_ID
+              value: C03nrg5fp
           volumeMounts:
             - mountPath: /secret/key.json
               name: service-account-key
