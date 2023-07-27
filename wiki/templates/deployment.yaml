@@ -48,6 +48,8 @@ spec:
           env:
           - name: CONNECT2_HOST
             value: {{.Values.connect2.host}}
+          - name: IAP_EXPECTED_AUDIENCE
+            value: {{.Values.iap.expected_audience}}
           resources:
             limits:
               cpu: 100m
