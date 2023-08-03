@@ -58,6 +58,8 @@ spec:
               value: ""
             - name: GOOGLE_IAP_AUDIENCE
               value: {{.Values.iap.expected_audience}}
+            - name: SECRET_KEY
+              value: {{.Values.secret_key}}
           resources:
             limits:
               memory: 512Mi

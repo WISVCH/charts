@@ -19,3 +19,5 @@ postgres:
   port: 5432
   database: dienst2
   cloudSQL: true
+
+secret_key: ""
