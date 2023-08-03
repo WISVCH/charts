@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "dienst2.fullname" . }}
+  labels:
+    {{- include "dienst2.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "dienst2.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        {{- include "dienst2.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: events
+      {{- with .Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 5
+          env:
+            - name: DATABASE_URL
+              value: postgresql://{{.Values.postgres.username}}:{{.Values.postgres.password}}@{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
+            - name: INTERNAL_IPS
+              value: ""
+            - name: GOOGLE_IAP_AUDIENCE
+              value: {{.Values.iap.expected_audience}}
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 150Mi
+        {{- if eq .Values.postgres.cloudSQL true }}
+        - name: cloud-sql-proxy
+          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.0.0
+          args:
+            - "--structured-logs"
+            - "--private-ip"
+            - "--port={{.Values.postgres.port}}"
+            - "-i" # Enables automatic authentication through the serviceaccount
+            - "wisvch:europe-west4:geurt"
+          securityContext:
+            runAsNonRoot: true
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 20m
+              memory: 100Mi
+          {{- end}}
