@@ -15,5 +15,5 @@ postgres:
   password: ""
   host: ""
   port: 5432
-  database: events
+  database: dienst2
   cloudSQL: true

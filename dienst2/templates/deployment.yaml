@@ -20,7 +20,7 @@ spec:
       labels:
         {{- include "dienst2.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: events
+      serviceAccountName: dienst2
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
