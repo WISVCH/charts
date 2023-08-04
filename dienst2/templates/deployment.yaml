@@ -33,24 +33,25 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8000
-              scheme: HTTP
-            initialDelaySeconds: 15
-            periodSeconds: 20
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8000
-              scheme: HTTP
-            initialDelaySeconds: 15
-            periodSeconds: 20
-            successThreshold: 1
-            timeoutSeconds: 5
+          # TODO: enable health probes.
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8000
+          #     scheme: HTTP
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 20
+          #   successThreshold: 1
+          #   timeoutSeconds: 5
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8000
+          #     scheme: HTTP
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 20
+          #   successThreshold: 1
+          #   timeoutSeconds: 5
           env:
             - name: CACHE_URL
               value: {{.Values.cache.url}}
