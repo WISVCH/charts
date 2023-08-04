@@ -20,6 +20,7 @@ spec:
       labels:
         run: dienst2
     spec:
+      serviceAccountName: dienst2
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
