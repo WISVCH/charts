@@ -25,6 +25,13 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+        - name: service-account-key
+          secret:
+            secretName: {{ .Values.serviceAccountSecretName }}
+            items: 
+              - key: {{ .Values.serviceAccountSecretKey }}
+                path: key.json
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -68,6 +75,11 @@ spec:
             requests:
               cpu: 50m
               memory: 150Mi
+          volumeMounts:
+            - mountPath: /google-service-account.json
+              name: service-account-key
+              subPath: google-service-account.json
+              readOnly: true
         {{- if eq .Values.postgres.cloudSQL true }}
         - name: cloud-sql-proxy
           image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.0.0
