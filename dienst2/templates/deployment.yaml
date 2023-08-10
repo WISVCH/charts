@@ -69,6 +69,8 @@ spec:
               value: {{.Values.iap.expected_audience}}
             - name: SECRET_KEY
               value: {{.Values.secret_key | quote }}
+            - name: GOOGLE_SERVICE_ACCOUNT_DELEGATED_USER
+              value: "root@ch.tudelft.nl"
           resources:
             limits:
               memory: 512Mi
