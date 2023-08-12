@@ -27,7 +27,7 @@ oauth:
     url: https://choice.wisv.ch/login/oauth2/code/wisvchconnect
     id: choice-dashboard
     secret: ""
-  scope: openid, profile, email, ldap
+  scope: openid, profile, email, auth
   groups:
     admin: chbeheer,dienst2,epa,vc
 
