@@ -11,8 +11,5 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets: {}
 
-connect2:
-  host: connect2:80
-
 iap:
   expected_audience: ""
