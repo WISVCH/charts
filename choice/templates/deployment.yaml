@@ -34,7 +34,7 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
+              path: /choice2/actuator/health/liveness
               port: http
             initialDelaySeconds: 15
             periodSeconds: 30
@@ -42,7 +42,7 @@ spec:
             timeoutSeconds: 5
           readinessProbe:
             httpGet:
-              path: /actuator/health/readiness
+              path: /choice2/actuator/health/readiness
               port: http
             initialDelaySeconds: 15
             periodSeconds: 30
@@ -53,6 +53,8 @@ spec:
             value: "8080"
           - name: SERVER_ADDRESS
             value: "0.0.0.0"
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: /choice2/
           - name: SPRING_PROFILES_ACTIVE
             value: production
           - name: SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE

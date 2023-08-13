@@ -1,8 +1,6 @@
 fullnameOverride: ""
 replicaCount: 1
 
-domain: choice.wisv.ch
-
 tlsSecret: ""
 
 service:
@@ -37,5 +35,3 @@ postgres:
   host: ""
   port: 5432
   database: choice
-
-    
