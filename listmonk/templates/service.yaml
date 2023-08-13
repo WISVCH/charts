@@ -23,8 +23,6 @@ metadata:
   name: {{ include "listmonk.fullname" . }}-internal
   labels:
     {{- include "listmonk.labels" . | nindent 4 }}
-  annotations:
-    cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: {{ .Values.service.type }}
   ports:
