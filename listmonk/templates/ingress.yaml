@@ -1,37 +1,42 @@
-# https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_iap
-apiVersion: networking.gke.io/v1
-kind: GCPBackendPolicy
-metadata:
-  name: listmonk-backend-policy
-  namespace: default
-spec:
-  default:
-    iap:
-      enabled: true
-      oauth2ClientSecret:
-        name: iap-secret
-      clientID: 966138216790-us6sue108a879v3vk2om9inn3ftpobkg.apps.googleusercontent.com
-  targetRef:
-    group: ""
-    kind: Service
-    name: listmonk
 ---
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: HTTPRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: listmonk-route
+  name: {{ include "listmonk.fullname" . }}-internal
   namespace: default
 spec:
-  parentRefs:
-  - kind: Gateway
-    name: gateway
-  hostnames:
-  - listmonk.wisv.ch
+  ingressClassName: nginx
   rules:
-  - backendRefs:
-    - name: listmonk
-      port: 
-        name: http
+    - host: {{ .Values.domain }}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/api/"
+            backend:
+              service:
+                name: {{ include "listmonk.fullname" $ }}-internal
+                port:
+                  name: http
+          - pathType: Prefix
+            path: "/admin/"
+            backend:
+              service:
+                name: {{ include "listmonk.fullname" $ }}-internal
+                port:
+                  name: http
+          - pathType: Prefix
+            path: "/webhooks/bounce"
+            backend:
+              service:
+                name: {{ include "listmonk.fullname" $ }}-internal
+                port:
+                  name: http
+  {{- if .Values.tlsSecret }}
+  tls:
+  - hosts:
+      - {{ .Values.domain }}
+    secretName: {{ .Values.tlsSecret }}
+  {{- end}}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -48,63 +53,63 @@ spec:
             path: /
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Prefix
             path: "/subscription/"
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Prefix
             path: "/link/"
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Prefix
             path: "/campaign/"
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Prefix
             path: "/public/"
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Prefix
             path: "/archive"
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Exact
             path: /archive.xml
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Prefix
             path: "/webhooks/service/"
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
           - pathType: Prefix
             path: /api/public/
             backend:
               service:
-                name: {{ include "listmonk.fullname" $ }}
+                name: {{ include "listmonk.fullname" $ }}-external
                 port:
                   name: http
   {{- if .Values.tlsSecret }}

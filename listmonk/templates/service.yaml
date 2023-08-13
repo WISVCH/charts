@@ -1,7 +1,44 @@
+---
+# https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_iap
+apiVersion: networking.gke.io/v1
+kind: GCPBackendPolicy
+metadata:
+  name: listmonk-backend-policy
+  namespace: default
+spec:
+  default:
+    iap:
+      enabled: true
+      oauth2ClientSecret:
+        name: iap-secret
+      clientID: 966138216790-us6sue108a879v3vk2om9inn3ftpobkg.apps.googleusercontent.com
+  targetRef:
+    group: ""
+    kind: Service
+    name: {{ include "listmonk.fullname" . }}-internal
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "listmonk.fullname" . }}
+  name: {{ include "listmonk.fullname" . }}-internal
+  labels:
+    {{- include "listmonk.labels" . | nindent 4 }}
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "listmonk.selectorLabels" . | nindent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "listmonk.fullname" . }}-external
   labels:
     {{- include "listmonk.labels" . | nindent 4 }}
 spec:
