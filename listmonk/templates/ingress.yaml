@@ -8,7 +8,7 @@ spec:
   - kind: Gateway
     name: gateway
   hostnames:
-  - list.wisv.ch
+  - {{ .Values.domain }}
   rules:
   - backendRefs:
     - name: {{ include "listmonk.fullname" . }}-internal
@@ -31,7 +31,7 @@ spec:
   - kind: Gateway
     name: gateway
   hostnames:
-  - list.wisv.ch
+  - {{ .Values.domain }}
   rules:
   - backendRefs:
     - name: {{ include "listmonk.fullname" . }}-external

@@ -14,8 +14,6 @@ service:
   port: 80
 
 domain: list.wisv.ch
-authDomain: authproxy.wisv.ch
-tlsSecret: 
 
 allowedGroups: 
   - chbeheer
