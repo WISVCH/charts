@@ -1,45 +1,37 @@
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+# https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_iap
+apiVersion: networking.gke.io/v1
+kind: GCPBackendPolicy
 metadata:
-  name: {{ include "listmonk.fullname" . }}-admin
+  name: listmonk-backend-policy
   namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/auth-url: "https://{{ .Values.authDomain }}/oauth2/auth{{- printf "?allowed_groups=%s"  (join "," .Values.allowedGroups) }}"
-    nginx.ingress.kubernetes.io/auth-signin: "https://{{ .Values.authDomain }}/oauth2/start?rd=https://{{ .Values.domain }}$escaped_request_uri"
 spec:
-  ingressClassName: nginx
+  default:
+    iap:
+      enabled: true
+      oauth2ClientSecret:
+        name: iap-secret
+      clientID: 966138216790-us6sue108a879v3vk2om9inn3ftpobkg.apps.googleusercontent.com
+  targetRef:
+    group: ""
+    kind: Service
+    name: listmonk
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: listmonk-route
+  namespace: default
+spec:
+  parentRefs:
+  - kind: Gateway
+    name: gateway
+  hostnames:
+  - listmonk.wisv.ch
   rules:
-    - host: {{ .Values.domain }}
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/api/"
-            backend:
-              service:
-                name: {{ include "listmonk.fullname" $ }}
-                port:
-                  name: http
-          - pathType: Prefix
-            path: "/admin/"
-            backend:
-              service:
-                name: {{ include "listmonk.fullname" $ }}
-                port:
-                  name: http
-          - pathType: Prefix
-            path: "/webhooks/bounce"
-            backend:
-              service:
-                name: {{ include "listmonk.fullname" $ }}
-                port:
-                  name: http
-  {{- if .Values.tlsSecret }}
-  tls:
-  - hosts:
-      - {{ .Values.domain }}
-    secretName: {{ .Values.tlsSecret }}
-  {{- end}}
+  - backendRefs:
+    - name: listmonk
+      port: 
+        name: http
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
