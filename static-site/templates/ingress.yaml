@@ -1,23 +1,18 @@
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
 metadata:
   name: {{ include "static-site.fullname" . }}
+  namespace: default
 spec:
+  parentRefs:
+  - kind: Gateway
+    name: gateway
+  hostnames:
+  - {{ .Values.domain }}
   rules:
-    - host: {{ .Values.domain }}
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: {{ include "static-site.fullname" $ }}
-                port:
-                  name: http
-  {{- if .Values.tlsSecret }}
-  tls:
-  - hosts:
-      - {{ .Values.domain }}
-    secretName: {{ .Values.tlsSecret }}
-  {{- end}}
+  - matches:
+    - path: 
+        value: "/"
+    backendRefs:
+    - name: {{ include "static-site.fullname" . }}
+      port: {{ default 80 .Values.service.port }}
