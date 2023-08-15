@@ -38,11 +38,7 @@ spec:
       port: 80
   - matches:
     - path:
-        PathMatchType : Exact
-        value: /
-    - path:
-        PathMatchType: Exact
-        value: /archive.xml
+        value: "/archive.xml"
     - path: 
         value: "/subscription/"
     - path: 
@@ -54,4 +50,4 @@ spec:
     - path: 
         value: "/webhooks/service/"
     - path: 
-        value: /api/public/
+        value: "/api/public/"
