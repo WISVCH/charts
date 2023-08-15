@@ -1,8 +1,6 @@
 fullnameOverride: ""
 replicaCount: 1
 
-tlsSecret: ""
-
 service:
   type: ClusterIP
   port: 80
@@ -22,7 +20,7 @@ hibernate:
 oauth:
   issuer: https://connect.ch.tudelft.nl
   client:
-    url: https://choice.wisv.ch/login/oauth2/code/wisvchconnect
+    url: https://ch.tudelft.nl/choice2/login/oauth2/code/wisvchconnect
     id: choice-dashboard
     secret: ""
   scope: openid, profile, email, auth
