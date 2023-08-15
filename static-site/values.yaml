@@ -1,7 +1,8 @@
 fullnameOverride: ""
 
 tlsSecret: ""
-domain: cod.wisv.ch
+domains:
+  - cod.wisv.ch
 
 replicaCount: 1
 containerPort: 3000

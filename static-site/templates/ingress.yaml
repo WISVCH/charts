@@ -8,7 +8,9 @@ spec:
   - kind: Gateway
     name: gateway
   hostnames:
-  - {{ .Values.domain }}
+  {{- range $domains}}
+    - {{ . }}
+  {{- end }}
   rules:
   - matches:
     - path: 
