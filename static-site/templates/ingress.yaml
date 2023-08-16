@@ -12,6 +12,7 @@ spec:
     - {{ . }}
   {{- end }}
   rules:
+  - matches:
     backendRefs:
     - name: {{ include "static-site.fullname" . }}
       port: {{ default 80 .Values.service.port }}
