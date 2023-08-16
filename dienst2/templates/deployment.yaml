@@ -47,7 +47,7 @@ spec:
               scheme: HTTP
               httpHeaders:
                 - name: Host
-                  value: {{.Values.host}}
+                  value: {{.Values.domain}}
             initialDelaySeconds: 15
             periodSeconds: 20
             successThreshold: 1
@@ -59,7 +59,7 @@ spec:
               scheme: HTTP
               httpHeaders:
                 - name: Host
-                  value: {{.Values.host}}
+                  value: {{.Values.domain}}
             initialDelaySeconds: 15
             periodSeconds: 20
             successThreshold: 1

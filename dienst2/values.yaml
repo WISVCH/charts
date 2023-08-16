@@ -1,7 +1,7 @@
 fullnameOverride: ""
 replicaCount: 1
 
-host: dienst2.ch.tudelft.nl
+domain: dienst2.ch.tudelft.nl
 
 image:
   repository: ghcr.io/wisvch/dienst2
