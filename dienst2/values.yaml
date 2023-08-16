@@ -7,6 +7,8 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets: {}
 
+allowedHosts: "*"
+
 cache:
   url: locmemcache://
 iap:
