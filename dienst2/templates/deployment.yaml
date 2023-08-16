@@ -45,6 +45,9 @@ spec:
               path: /healthz
               port: 8000
               scheme: HTTP
+              httpHeaders:
+                - name: Host
+                  value: {{.Values.host}}
             initialDelaySeconds: 15
             periodSeconds: 20
             successThreshold: 1
@@ -54,6 +57,9 @@ spec:
               path: /healthz
               port: 8000
               scheme: HTTP
+              httpHeaders:
+                - name: Host
+                  value: {{.Values.host}}
             initialDelaySeconds: 15
             periodSeconds: 20
             successThreshold: 1
