@@ -18,8 +18,8 @@ spec:
     - name: {{ include "hackdelft.fullname" $ }}-{{ $.Values.defaultEdition }}
       port: 
         name: http
----
 {{- range $key, $val := .Values.editions }}
+---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
 metadata:
