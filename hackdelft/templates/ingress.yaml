@@ -1,45 +1,44 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
 metadata:
   name: {{ include "hackdelft.fullname" . }}
+  namespace: default
 spec:
+  parentRefs:
+  - kind: Gateway
+    namespace: gateway-infra
+    name: gateway
+  hostnames:
+  {{- range .Values.domains}}
+    - {{ . }}
+  {{- end }}
   rules:
-    {{- range $domain := .Values.domains}}
-    - host: {{ $domain }}
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: {{ include "hackdelft.fullname" $ }}-{{ $.Values.defaultEdition }}
-                port:
-                  name: http
-    {{- end }}
-    {{- range $key, $val := .Values.editions }}
-    {{- range $domain := $.Values.domains}}
-    - host: {{ $key }}.{{ $domain }}
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: {{ include "hackdelft.fullname" $ }}-{{ $key }}
-                port:
-                  name: http
-    {{- end }}
-    {{- end }}
-  {{- if $.Values.tlsSecret }}
-  tls:
-  - hosts:
-    {{- range $domain := $.Values.domains}}
-      - {{ $domain }}
-    {{- end }}
-    {{- range $key, $val := .Values.editions }}
-    {{- range $domain := $.Values.domains}}
-      - {{ $key }}.{{ $domain }}
-    {{- end }}
-    {{- end }}
-    secretName: {{ $.Values.tlsSecret }}
-  {{- end}}
+  - matches:
+    backendRefs:
+    - name: {{ include "hackdelft.fullname" $ }}-{{ $.Values.defaultEdition }}
+      port: 
+        name: http
+---
+{{- range $key, $val := .Values.editions }}
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: {{ include "hackdelft.fullname" $ }}-{{ $key }}
+  namespace: default
+spec:
+  parentRefs:
+  - kind: Gateway
+    namespace: gateway-infra
+    name: gateway
+  hostnames:
+  {{- range $domain := $.Values.domains}}
+    - {{ $key }}.{{ $domain }}
+  {{- end }}
+  rules:
+  - matches:
+    backendRefs:
+    - name: {{ include "hackdelft.fullname" $ }}-{{ $key }}
+      port: 
+        name: http
+{{- end }}
+
