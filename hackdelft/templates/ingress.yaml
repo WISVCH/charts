@@ -16,8 +16,7 @@ spec:
   - matches:
     backendRefs:
     - name: {{ include "hackdelft.fullname" $ }}-{{ $.Values.defaultEdition }}
-      port: 
-        name: http
+      port: 80
 {{- range $key, $val := .Values.editions }}
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -38,7 +37,6 @@ spec:
   - matches:
     backendRefs:
     - name: {{ include "hackdelft.fullname" $ }}-{{ $key }}
-      port: 
-        name: http
+      port: 80
 {{- end }}
 
