@@ -16,7 +16,7 @@ spec:
   - matches:
     backendRefs:
     - name: {{ include "areafiftylan-legacy.fullname" $ }}
-      port: {{ default 80 .Values.service.port }}
+      port: {{ default 80 .Values.frontend.service.port }}
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
@@ -36,7 +36,7 @@ spec:
   - matches:
     backendRefs:
     - name: {{ include "areafiftylan-legacy.fullname" $ }}
-      port: {{ default 80 .Values.service.port }}
+      port: {{ default 80 .Values.api.service.port }}
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: HTTPRoute
@@ -56,5 +56,5 @@ spec:
   - matches:
     backendRefs:
     - name: {{ include "areafiftylan-legacy.fullname" $ }}
-      port: {{ default 80 .Values.service.port }}
+      port: {{ default 80 .Values.admin.service.port }}
 
