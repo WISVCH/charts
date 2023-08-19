@@ -30,14 +30,5 @@ postgres:
   host: ""
   port: 5432
 
-ingress:
-  enabled: false
-  className: ""
-  hosts:
-    - host: wisv.ch
-      paths:
-        - path: "/"
-          pathType: Prefix
-  tls:
-    - hosts: []
-      secretName: ""
+domains:
+  - wisv.ch
