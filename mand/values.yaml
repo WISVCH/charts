@@ -32,3 +32,8 @@ postgres:
 
 domains:
   - wisv.ch
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 100Mi
