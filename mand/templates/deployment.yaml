@@ -63,16 +63,16 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-              scheme: HTTP
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-              scheme: HTTP
+#          livenessProbe:
+#            httpGet:
+#              path: /healthz
+#              port: 8080
+#              scheme: HTTP
+#          readinessProbe:
+#            httpGet:
+#              path: /healthz
+#              port: 8080
+#              scheme: HTTP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
