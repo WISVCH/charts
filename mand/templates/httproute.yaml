@@ -14,6 +14,14 @@ spec:
   {{- end }}
   rules:
   - matches:
+    - path: 
+        value: "/admin"
     backendRefs:
-    - name: {{ include "mand.fullname" . }}
-      port: {{ default 80 .Values.service.port }}
+    - name: {{ include "mand.fullname" . }}-internal
+      port: 80
+  - matches:
+    - path:
+        value: "/"
+    backendRefs:
+    - name: {{ include "mand.fullname" . }}-external
+      port: 80
