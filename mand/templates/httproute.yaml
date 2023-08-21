@@ -16,6 +16,8 @@ spec:
   - matches:
     - path: 
         value: "/admin"
+    - path:
+        value: "/link/"
     backendRefs:
     - name: {{ include "mand.fullname" . }}-internal
       port: 80
