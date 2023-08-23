@@ -55,10 +55,13 @@ spec:
             value: "0.0.0.0"
           - name: SERVER_SERVLET_CONTEXT_PATH
             value: /choice2/
+          - name: SERVER_FORWARD_HEADERS_STRATEGY
+            value: "FRAMEWORK"
           - name: SPRING_PROFILES_ACTIVE
             value: production
           - name: SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE
             value: 64MB
+          - name:
           - name: SPRING_SERVLET_MULTIPART_MAX_fILE_SIZE
             value: 64MB
           - name: JAVA_OPTS
