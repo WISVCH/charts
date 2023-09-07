@@ -29,7 +29,7 @@ hibernate:
 oauth:
   issuer: https://connect.ch.tudelft.nl
   client:
-    url: https://ch.tudelft.nl/events
+    url: https://events.wisv.ch
     id: events-cloud
     secret: ""
   scope: openid, profile, email, auth
