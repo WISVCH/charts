@@ -72,15 +72,15 @@ spec:
           - name: SPRING_DATASOURCE_URL
             value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
           - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
-            value: 5
+            value: "5"
           - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
-            value: 1
+            value: "1"
           - name: SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE
-            value: 10
+            value: "10"
           - name: SPRING_DATASOURCE_TOMCAT_MIN_IDLE
-            value: 1
+            value: "1"
           - name: SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE
-            value: 1
+            value: "1"
           - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
             value: {{.Values.hibernate.hb2mddl.auto}}
           - name: SPRING_JPA_GENERATE_DDL
@@ -102,6 +102,6 @@ spec:
           resources:
             requests:
               cpu: 15m
-              memory: 566M
+              memory: 128M
             limits:
-              memory: 566M
+              memory: 256M
