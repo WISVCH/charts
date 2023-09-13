@@ -64,13 +64,23 @@ spec:
           - name: SPRING_SERVLET_MULTIPART_MAX_fILE_SIZE
             value: 64MB
           - name: JAVA_OPTS
-            value: -Xms128m -Xmx512m
+            value: -Xms64m -Xmx128m -XX:+UseSerialGC -XX:MaxRAM=72m -Xss512k
           - name: SPRING_DATASOURCE_USERNAME
             value: {{ .Values.postgres.username}}
           - name: SPRING_DATASOURCE_PASSWORD
             value: {{ .Values.postgres.password}}
           - name: SPRING_DATASOURCE_URL
             value: jdbc:postgresql://{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
+          - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+            value: 5
+          - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+            value: 1
+          - name: SPRING_DATASOURCE_TOMCAT_MAX_ACTIVE
+            value: 10
+          - name: SPRING_DATASOURCE_TOMCAT_MIN_IDLE
+            value: 1
+          - name: SPRING_DATASOURCE_TOMCAT_INITIAL_SIZE
+            value: 1
           - name: SPRING_JPA_HIBERNATE_HB2MDDL_AUTO
             value: {{.Values.hibernate.hb2mddl.auto}}
           - name: SPRING_JPA_GENERATE_DDL
