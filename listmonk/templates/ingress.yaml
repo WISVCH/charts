@@ -12,6 +12,8 @@ spec:
   - {{ .Values.domain }}
   rules:
   - matches:
+    - path:
+        value: "/"
     - path: 
         value: "/api/"
     - path: 
