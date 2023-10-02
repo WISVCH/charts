@@ -39,6 +39,7 @@ oauth:
     beta: joepj, juliand
 links:
   gtc: "https://ch.tudelft.nl/wp-content/uploads/Deelnemersvoorwaarden_versie_12_06_2023.pdf" 
+  passes: "http://passes.default.svc.cluster.local./passes"
 mollie:
   key: ""
 

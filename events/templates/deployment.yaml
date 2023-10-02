@@ -124,6 +124,8 @@ spec:
               value: {{.Values.mollie.key}}
             - name: LINKS_GTC
               value: {{.Values.links.gtc}}
+            - name: LINKS_PASSES
+              value: {{.Values.links.passes}}
           resources:
             limits:
               memory: 512Mi
