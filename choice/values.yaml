@@ -11,21 +11,10 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets: {}
 
-
 hibernate:
   generateDdl: false
   hb2mddl:
     auto: validate
-
-oauth:
-  issuer: https://connect.ch.tudelft.nl
-  client:
-    url: https://ch.tudelft.nl/choice2/login/oauth2/code/wisvchconnect
-    id: choice-dashboard
-    secret: ""
-  scope: openid, profile, email, auth
-  groups:
-    admin: chbeheer,dienst2,epa,vc
 
 postgres:
   username: ""

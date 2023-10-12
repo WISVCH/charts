@@ -85,18 +85,6 @@ spec:
             value: {{.Values.hibernate.hb2mddl.auto}}
           - name: SPRING_JPA_GENERATE_DDL
             value: {{.Values.hibernate.generateDdl | quote}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_ISSUER_URI
-            value: {{.Values.oauth.issuer}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_WISVCHCONNECT_CLIENT_URI
-            value: {{.Values.oauth.client.url}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_ID
-            value: {{.Values.oauth.client.id}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_CLIENT_SECRET
-            value: {{.Values.oauth.client.secret}}
-          - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_WISVCHCONNECT_SCOPE
-            value: {{.Values.oauth.scope}}
-          - name: WISVCH_CONNECT_ADMIN_GROUPS
-            value: {{.Values.oauth.groups.admin}}
           - name: TZ
             value: Europe/Amsterdam
           resources:
