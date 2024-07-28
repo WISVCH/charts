@@ -126,6 +126,12 @@ spec:
               value: {{.Values.links.gtc}}
             - name: LINKS_PASSES
               value: {{.Values.links.passes}}
+            - name: GOOGLE_WALLET_ISSUER_ID
+              value: {{.Values.googleWallet.issuerId}}
+            - name: GOOGLE_WALLET_ORIGIN
+              value: {{.Values.googleWallet.origin}}
+            - name: GOOGLE_WALLET_BASE_URL
+              value: {{.Values.googleWallet.baseUrl}}
           resources:
             limits:
               memory: 512Mi
