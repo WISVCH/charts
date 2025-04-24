@@ -16,7 +16,7 @@ spec:
   - matches:
     backendRefs:
     - name: {{ include "archive.fullname" $ }}
-      port: {{ default 80 .Values.service.port }}
+      port: {{ default 80 $.Values.service.port }}
 {{- end }}
 {{- end }}
 
