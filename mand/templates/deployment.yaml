@@ -44,6 +44,8 @@ spec:
             value: {{ .Values.postgres.host }}
           - name: DBPORT
             value: {{ .Values.postgres.port | quote }}
+          - name: PGSSLMODE
+            value: {{ .Values.postgres.sslmode | quote }}
           - name: CONNECTURL
             value: {{ .Values.auth.url }}
           - name: CONNECTCLIENTID

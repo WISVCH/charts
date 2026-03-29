@@ -30,6 +30,7 @@ postgres:
   name: mand
   host: ""
   port: 5432
+  sslmode: disable
   cloudSQL: false
   cloudSQLProxy:
     image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.13.0
