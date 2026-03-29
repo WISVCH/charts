@@ -19,6 +19,26 @@ spec:
     spec:
       restartPolicy: OnFailure
       serviceAccountName: {{ .Values.serviceAccountName | quote }}
+      {{- if eq .Values.postgres.cloudSQL true }}
+      initContainers:
+      - name: cloud-sql-proxy
+        image: {{ .Values.postgres.cloudSQLProxy.image | quote }}
+        restartPolicy: Always
+        args:
+          - "--auto-iam-authn"
+          - "--structured-logs"
+          - "--private-ip"
+          - "--port={{ .Values.postgres.port }}"
+          - {{ .Values.postgres.cloudSQLProxy.instanceConnectionName | quote }}
+        securityContext:
+          runAsNonRoot: true
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 20m
+            memory: 100Mi
+      {{- end }}
       containers:
       - name: upgrade-db
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -37,23 +57,5 @@ spec:
             value: {{ .Values.postgres.name }}
           - name: LISTMONK_db__ssl_mode
             value: disable
-      {{- if eq .Values.postgres.cloudSQL true }}
-      - name: cloud-sql-proxy
-        image: {{ .Values.postgres.cloudSQLProxy.image | quote }}
-        args:
-          - "--auto-iam-authn"
-          - "--structured-logs"
-          - "--private-ip"
-          - "--port={{ .Values.postgres.port }}"
-          - {{ .Values.postgres.cloudSQLProxy.instanceConnectionName | quote }}
-        securityContext:
-          runAsNonRoot: true
-        resources:
-          limits:
-            memory: 200Mi
-          requests:
-            cpu: 20m
-            memory: 100Mi
-      {{- end }}
 
 {{ end }}
