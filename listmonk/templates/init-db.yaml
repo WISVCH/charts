@@ -8,15 +8,17 @@ metadata:
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade
     "helm.sh/hook-weight": "5"
-    "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
 spec:
+  backoffLimit: 1
   template:
     metadata:
       labels:
         {{- include "listmonk.selectorLabels" . | nindent 8 }}
-        job: "upgrade-db" 
+        job: "upgrade-db"
     spec:
       restartPolicy: Never
+      serviceAccountName: {{ .Values.serviceAccountName | quote }}
       containers:
       - name: upgrade-db
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -35,5 +37,23 @@ spec:
             value: {{ .Values.postgres.name }}
           - name: LISTMONK_db__ssl_mode
             value: disable
+      {{- if eq .Values.postgres.cloudSQL true }}
+      - name: cloud-sql-proxy
+        image: {{ .Values.postgres.cloudSQLProxy.image | quote }}
+        args:
+          - "--auto-iam-authn"
+          - "--structured-logs"
+          - "--private-ip"
+          - "--port={{ .Values.postgres.port }}"
+          - {{ .Values.postgres.cloudSQLProxy.instanceConnectionName | quote }}
+        securityContext:
+          runAsNonRoot: true
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 20m
+            memory: 100Mi
+      {{- end }}
 
 {{ end }}
