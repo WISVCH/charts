@@ -1,5 +1,6 @@
 fullnameOverride: ""
 replicaCount: 1
+serviceAccountName: dienst2
 
 domain: dienst2.ch.tudelft.nl
 
@@ -23,6 +24,9 @@ postgres:
   port: 5432
   database: dienst2
   cloudSQL: true
+  cloudSQLProxy:
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.13.0
+    instanceConnectionName: wisvch:europe-west4:geurt
 
 secret_key: ""
 
