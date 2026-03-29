@@ -24,6 +24,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      serviceAccountName: {{ .Values.serviceAccountName | quote }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -93,3 +94,21 @@ spec:
               memory: 256M
             limits:
               memory: 512M
+        {{- if eq .Values.postgres.cloudSQL true }}
+        - name: cloud-sql-proxy
+          image: {{ .Values.postgres.cloudSQLProxy.image | quote }}
+          args:
+            - "--auto-iam-authn"
+            - "--structured-logs"
+            - "--private-ip"
+            - "--port={{ .Values.postgres.port }}"
+            - {{ .Values.postgres.cloudSQLProxy.instanceConnectionName | quote }}
+          securityContext:
+            runAsNonRoot: true
+          resources:
+            limits:
+              memory: 200Mi
+            requests:
+              cpu: 20m
+              memory: 100Mi
+        {{- end }}

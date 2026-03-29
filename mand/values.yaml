@@ -1,4 +1,5 @@
 replicaCount: 1
+serviceAccountName: default
 image:
   repository: ghcr.io/wisvch/mand
   tag: latest
@@ -29,6 +30,10 @@ postgres:
   name: mand
   host: ""
   port: 5432
+  cloudSQL: false
+  cloudSQLProxy:
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.13.0
+    instanceConnectionName: wisvch:europe-west4:geurt
 
 domains:
   - wisv.ch

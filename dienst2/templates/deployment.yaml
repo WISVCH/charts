@@ -20,7 +20,7 @@ spec:
       labels:
         run: dienst2
     spec:
-      serviceAccountName: dienst2
+      serviceAccountName: {{ .Values.serviceAccountName | quote }}
       {{- with .Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -29,7 +29,7 @@ spec:
         - name: service-account-key
           secret:
             secretName: {{ .Values.serviceAccountSecretName }}
-            items: 
+            items:
               - key: {{ .Values.serviceAccountSecretKey }}
                 path: google-service-account.json
       containers:
@@ -47,7 +47,7 @@ spec:
               scheme: HTTP
               httpHeaders:
                 - name: Host
-                  value: {{.Values.domain}}
+                  value: {{ .Values.domain | quote }}
             initialDelaySeconds: 15
             periodSeconds: 20
             successThreshold: 1
@@ -59,22 +59,22 @@ spec:
               scheme: HTTP
               httpHeaders:
                 - name: Host
-                  value: {{.Values.domain}}
+                  value: {{ .Values.domain | quote }}
             initialDelaySeconds: 15
             periodSeconds: 20
             successThreshold: 1
             timeoutSeconds: 5
           env:
             - name: ALLOWED_HOSTS
-              value: {{.Values.allowedHosts}}
+              value: {{ .Values.allowedHosts | quote }}
             - name: CACHE_URL
-              value: {{.Values.cache.url}}
+              value: {{ .Values.cache.url | quote }}
             - name: DATABASE_URL
               value: postgresql://{{.Values.postgres.username}}:{{.Values.postgres.password}}@{{.Values.postgres.host}}:{{.Values.postgres.port}}/{{.Values.postgres.database}}
             - name: INTERNAL_IPS
               value: ""
             - name: GOOGLE_IAP_AUDIENCE
-              value: {{.Values.iap.expected_audience}}
+              value: {{ .Values.iap.expected_audience | quote }}
             - name: SECRET_KEY
               value: {{.Values.secret_key | quote }}
             - name: GOOGLE_SERVICE_ACCOUNT_DELEGATED_USER
@@ -92,13 +92,13 @@ spec:
               readOnly: true
         {{- if eq .Values.postgres.cloudSQL true }}
         - name: cloud-sql-proxy
-          image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.0.0
+          image: {{ .Values.postgres.cloudSQLProxy.image | quote }}
           args:
+            - "--auto-iam-authn"
             - "--structured-logs"
             - "--private-ip"
             - "--port={{.Values.postgres.port}}"
-            - "-i" # Enables automatic authentication through the serviceaccount
-            - "wisvch:europe-west4:geurt"
+            - {{ .Values.postgres.cloudSQLProxy.instanceConnectionName | quote }}
           securityContext:
             runAsNonRoot: true
           resources:
