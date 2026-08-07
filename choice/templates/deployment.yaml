@@ -89,11 +89,7 @@ spec:
           - name: TZ
             value: Europe/Amsterdam
           resources:
-            requests:
-              cpu: 15m
-              memory: 256M
-            limits:
-              memory: 512M
+            {{- toYaml .Values.resources | nindent 12 }}
         {{- if eq .Values.postgres.cloudSQL true }}
         - name: cloud-sql-proxy
           image: {{ .Values.postgres.cloudSQLProxy.image | quote }}
@@ -106,9 +102,5 @@ spec:
           securityContext:
             runAsNonRoot: true
           resources:
-            limits:
-              memory: 200Mi
-            requests:
-              cpu: 20m
-              memory: 100Mi
+            {{- toYaml .Values.postgres.cloudSQLProxy.resources | nindent 12 }}
         {{- end }}

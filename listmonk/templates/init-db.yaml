@@ -33,17 +33,15 @@ spec:
         securityContext:
           runAsNonRoot: true
         resources:
-          limits:
-            memory: 200Mi
-          requests:
-            cpu: 20m
-            memory: 100Mi
+          {{- toYaml .Values.postgres.cloudSQLProxy.resources | nindent 10 }}
       {{- end }}
       containers:
       - name: upgrade-db
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         command: ["./listmonk", "--upgrade", "--yes"]
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          {{- toYaml .Values.initResources | nindent 10 }}
         env:
           - name: LISTMONK_db__host
             value: {{ .Values.postgres.host }}

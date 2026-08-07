@@ -90,9 +90,5 @@ spec:
           securityContext:
             runAsNonRoot: true
           resources:
-            limits:
-              memory: 200Mi
-            requests:
-              cpu: 20m
-              memory: 100Mi
+            {{- toYaml .Values.postgres.cloudSQLProxy.resources | nindent 12 }}
         {{- end }}
