@@ -41,4 +41,6 @@ spec:
             httpGet:
               path: /
               port: http
+          resources:
+            {{- toYaml .resources | nindent 12 }}
 {{- end }}

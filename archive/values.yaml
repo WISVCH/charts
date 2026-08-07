@@ -10,3 +10,6 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
   pullSecrets: {}
+
+# Resource requests and limits for the archive container.
+resources: {}

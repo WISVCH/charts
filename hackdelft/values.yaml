@@ -18,6 +18,8 @@ editions:
       tag: 20220502-6dd5cd2
       pullPolicy: IfNotPresent
       pullSecrets: {}
+    # Resource requests and limits for this edition's container.
+    resources: {}
   2019:
     replicaCount: 1
     containerPort: 8080
@@ -29,6 +31,7 @@ editions:
       tag: 61
       pullPolicy: IfNotPresent
       pullSecrets: {}
+    resources: {}
   2018:
     replicaCount: 1
     containerPort: 8080
@@ -40,6 +43,7 @@ editions:
       tag: 75
       pullPolicy: IfNotPresent
       pullSecrets: {}
+    resources: {}
   2017:
     replicaCount: 1
     containerPort: 3000
@@ -51,3 +55,4 @@ editions:
       tag: 41
       pullPolicy: IfNotPresent
       pullSecrets: {}
+    resources: {}
